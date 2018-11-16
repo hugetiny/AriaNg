@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngChart', ['$window', 'chartTheme', function ($window, chartTheme) {
+    angular.module('ariaNg')
+        .directive('ngChart', ['$window', 'chartTheme', function ($window, chartTheme) {
         return {
             restrict: 'E',
             template: '<div></div>',
@@ -46,7 +47,8 @@
                 });
             }
         };
-    }]).directive('ngPopChart', ['$window', 'chartTheme', function ($window, chartTheme) {
+    }])
+        .directive('ngPopChart', ['$window', 'chartTheme', function ($window, chartTheme) {
         return {
             restrict: 'A',
             scope: {
@@ -105,7 +107,8 @@
                 }, true);
             }
         };
-    }]).factory('chartTheme', ['chartDefaultTheme', function (chartDefaultTheme) {
+    }])
+        .factory('chartTheme', ['chartDefaultTheme', function (chartDefaultTheme) {
         var themes = {
             defaultTheme: chartDefaultTheme
         };
@@ -115,7 +118,8 @@
                 return themes[name + 'Theme'] ? themes[name + 'Theme'] : {};
             }
         };
-    }]).factory('chartDefaultTheme', function () {
+    }])
+        .factory('chartDefaultTheme', function () {
         return {
             color: ['#74a329', '#3a89e9'],
             legend: {

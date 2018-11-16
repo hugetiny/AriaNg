@@ -131,7 +131,7 @@
             'Open Torrent File': 'Open Torrent File',
             'Open Metalink File': 'Open Metalink File',
             'Start Download': 'Start Download',
-            'Manual Download': 'Manual Download',
+            'Download Later': 'Download Later',
             'Support multiple URLs, one URL per line.': 'Support multiple URLs, one URL per line.',
             'Your browser does not support loading file!': 'Your browser does not support loading file!',
             'The selected file type is invalid!': 'The selected file type is invalid!',

@@ -48,6 +48,8 @@ $mainBg: #2B2B2B;
         border-color: $borderColor;
     }
     .form-control {
+        text-align: center;
+        padding-right: 26px;
         background-color: $btnBg;
         border-color: $borderColor;
         color: $textColor;
@@ -80,9 +82,13 @@ $mainBg: #2B2B2B;
                 color: #999999;
             }
             @media (max-width: 767px) {
-                padding-left: 20px;
-                .navbar-nav {
-                    margin-left: -10px;
+                padding: 0 10px;
+                .navbar-searchbar {
+
+                    float:none !important;
+                    .navbar-nav>li {
+                        width: 100%;
+                    }
                 }
 
                 //.nav > li.divider {
@@ -214,7 +220,7 @@ $mainBg: #2B2B2B;
 
         @media screen and (max-width: 767px) {
             .content {
-                margin-top: 5px;
+                margin-top: 54px;
             }
         }
         .nav-tabs-custom {
@@ -549,6 +555,11 @@ $mainBg: #2B2B2B;
     /* new-task-table */
     .new-task-table {
         background-color: #3c3c3c;
+        .btn-group{
+            margin: auto;
+            display: table;
+            margin-bottom: 10px;
+        }
     }
 
     /* echarts*/
