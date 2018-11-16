@@ -92,9 +92,9 @@ td {
     background-color: #fff;
 }
 
-.content-wrapper > .content-body {
-    overflow-y: scroll;
-}
+/*.content-wrapper > .content-body {*/
+    /*overflow-y: scroll;*/
+/*}*/
 
 .main-footer > .navbar {
     margin-bottom: 0;

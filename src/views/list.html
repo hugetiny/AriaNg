@@ -2,31 +2,25 @@
     <div id="task-table" class="task-table">
         <div class="task-table-title">
             <div class="row">
-                <div class="col-md-8 col-sm-7">
-                    <div class="row">
-                        <div class="col-sm-8">
+                <div class="col-sm-4">
                             <a ng-click="changeDisplayOrder('name:asc', true)" translate>File Name</a>
                             <i class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetDisplayOrder('name:asc'), 'fa-sort-desc fa-order-desc': isSetDisplayOrder('name:desc')}"></i>
                         </div>
-                        <div class="col-sm-4">
+                <div class="col-sm-2">
                             <a ng-click="changeDisplayOrder('size:asc', true)" translate>File Size</a>
                             <i class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetDisplayOrder('size:asc'), 'fa-sort-desc fa-order-desc': isSetDisplayOrder('size:desc')}"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="row">
-                        <div class="col-sm-6">
+
+                <div class="col-sm-2">
                             <a ng-click="changeDisplayOrder('percent:desc', true)" translate>Progress</a>
                             <i class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetDisplayOrder('percent:asc'), 'fa-sort-desc fa-order-desc': isSetDisplayOrder('percent:desc')}"></i>
                         </div>
-                        <div class="col-sm-6">
+                <div class="col-sm-2">
                             <a ng-click="changeDisplayOrder('remain:asc', true)" translate>Remain Time</a>
                             <i class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetDisplayOrder('remain:asc'), 'fa-sort-desc fa-order-desc': isSetDisplayOrder('remain:desc')}"></i>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
+
+                <div class="col-sm-2">
                     <a ng-click="changeDisplayOrder('dspeed:desc', true)" translate>Download Speed</a>
                     <i class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetDisplayOrder('dspeed:asc'), 'fa-sort-desc fa-order-desc': isSetDisplayOrder('dspeed:desc')}"></i>
                 </div>
@@ -48,7 +42,7 @@
                         <a ng-href="#!/task/detail/{{task.gid}}" title="{{'Click to view task detail' | translate}}">
                             <span ng-if="task.files" ng-bind="('format.settings.file-count' | translate: {count: task.selectedFileCount})"></span>
                         </a><i class="icon-error fa fa-times" ng-if="task && task.status === 'error' && task.errorDescription" title="{{task.errorDescription | translate}}"></i><i class="icon-seeder fa fa-arrow-up" ng-if="task && task.status === 'active' && task.seeder" title="{{'Seeding' | translate}}"></i>
-                        <a ng-if="task && task.status === 'error' && task.errorDescription && !task.bittorrent" ng-click="restart(task)" title="{{'Restart' | translate}}" translate>Restart</a>
+                        <a ng-if="isTaskRetryable(task)" ng-click="retryTask(task)" title="{{'Retry' | translate}}" translate>Retry</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-3 col-xs-12">
@@ -76,6 +70,13 @@
         </div>
         <div id="task-table-contextmenu">
             <ul class="dropdown-menu" role="menu">
+                <li ng-if="isSelectedTaskRetryable()">
+                    <a tabindex="-1" class="pointer-cursor" title="{{'Retry Selected Tasks' | translate}}" ng-click="retryTasks()">
+                        <i class="fa fa-refresh"></i>
+                        <span translate>Retry Selected Tasks</span>
+                    </a>
+                </li>
+                <li class="divider" ng-if="isSelectedTaskRetryable()"></li>
                 <li ng-if="isSpecifiedTaskSelected('paused')">
                     <a tabindex="-1" class="pointer-cursor" title="{{'Start' | translate}}" ng-click="changeTasksState('start')">
                         <i class="fa fa-play"></i>
@@ -144,6 +145,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a tabindex="-1" class="pointer-cursor" title="{{'Select All' | translate}}" ng-click="selectAllTasks()">
+                        <i class="fa fa-th-large"></i>
+                        <span translate>Select All</span>
+                    </a>
                 </li>
                 <li class="divider" ng-if="isSingleUrlTaskSelected()"></li>
                 <li ng-if="isSingleUrlTaskSelected()">

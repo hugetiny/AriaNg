@@ -9,7 +9,7 @@
 
 .skin-aria-ng .main-header .navbar {
     background-color: #f6f6f6;
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
 }
 
 .skin-aria-ng .main-header .navbar .nav > li > a {
