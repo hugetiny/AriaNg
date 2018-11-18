@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').controller('MainController', ['$rootScope', '$scope', '$route', '$window', '$location', '$document', '$interval', 'clipboard', 'aria2RpcErrors', 'ariaNgCommonService', 'ariaNgNotificationService', 'ariaNgLocalizationService', 'ariaNgSettingService', 'ariaNgMonitorService', 'ariaNgTitleService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $route, $window, $location, $document, $interval, clipboard, aria2RpcErrors, ariaNgCommonService, ariaNgNotificationService, ariaNgLocalizationService, ariaNgSettingService, ariaNgMonitorService, ariaNgTitleService, aria2TaskService, aria2SettingService) {
+    angular.module('weDownload').controller('MainController', ['$rootScope', '$scope', '$route', '$window', '$location', '$document', '$interval', 'clipboard', 'aria2RpcErrors', 'WeDownloadCommonService', 'WeDownloadNotificationService', 'WeDownloadLocalizationService', 'WeDownloadSettingService', 'WeDownloadMonitorService', 'WeDownloadTitleService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $route, $window, $location, $document, $interval, clipboard, aria2RpcErrors, WeDownloadCommonService, WeDownloadNotificationService, WeDownloadLocalizationService, WeDownloadSettingService, WeDownloadMonitorService, WeDownloadTitleService, aria2TaskService, aria2SettingService) {
         var pageTitleRefreshPromise = null;
         var globalStatRefreshPromise = null;
 
         var refreshPageTitle = function () {
-            $document[0].title = ariaNgTitleService.getFinalTitleByGlobalStat($scope.globalStat);
+            $document[0].title = WeDownloadTitleService.getFinalTitleByGlobalStat($scope.globalStat);
         };
 
         var refreshGlobalStat = function (silent, callback) {
@@ -18,7 +18,7 @@
 
                 if (response.success) {
                     $scope.globalStat = response.data;
-                    ariaNgMonitorService.recordGlobalStat(response.data);
+                    WeDownloadMonitorService.recordGlobalStat(response.data);
                 }
 
                 if (callback) {
@@ -27,22 +27,22 @@
             }, silent);
         };
 
-        if (ariaNgSettingService.getBrowserNotification()) {
-            ariaNgNotificationService.requestBrowserPermission();
+        if (WeDownloadSettingService.getBrowserNotification()) {
+            WeDownloadNotificationService.requestBrowserPermission();
         }
 
         $scope.globalStatusContext = {
-            isEnabled: ariaNgSettingService.getGlobalStatRefreshInterval() > 0,
-            data: ariaNgMonitorService.getGlobalStatsData()
+            isEnabled: WeDownloadSettingService.getGlobalStatRefreshInterval() > 0,
+            data: WeDownloadMonitorService.getGlobalStatsData()
         };
 
         $scope.enableDebugMode = function () {
-            return ariaNgSettingService.isEnableDebugMode();
+            return WeDownloadSettingService.isEnableDebugMode();
         };
 
         $scope.quickSettingContext = null;
 
-        $scope.rpcSettings = ariaNgSettingService.getAllRpcSettings();
+        $scope.rpcSettings = WeDownloadSettingService.getAllRpcSettings();
 
         $scope.isTaskSelected = function () {
             return $rootScope.taskContext.getSelectedTaskIds().length > 0;
@@ -113,7 +113,7 @@
 
             $rootScope.loadPromise = invoke(gids, function (response) {
                 if (response.hasError && gids.length > 1) {
-                    ariaNgLocalizationService.showError('Failed to change some tasks state.');
+                    WeDownloadLocalizationService.showError('Failed to change some tasks state.');
                 }
 
                 if (!response.hasSuccess) {
@@ -139,16 +139,16 @@
         };
 
         $scope.retryTask = function (task) {
-            ariaNgLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? AriaNg will create same task after clicking OK.', 'info', function () {
+            WeDownloadLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? WeDownload will create same task after clicking OK.', 'info', function () {
                 $rootScope.loadPromise = aria2TaskService.retryTask(task.gid, function (response) {
                     if (!response.success) {
-                        ariaNgLocalizationService.showError('Failed to retry this task.');
+                        WeDownloadLocalizationService.showError('Failed to retry this task.');
                         return;
                     }
 
                     refreshGlobalStat(true);
 
-                    var actionAfterRetryingTask = ariaNgSettingService.getAfterRetryingTask();
+                    var actionAfterRetryingTask = WeDownloadSettingService.getAfterRetryingTask();
 
                     if (response.success && response.data) {
                         if (actionAfterRetryingTask === 'task-list-downloading') {
@@ -207,12 +207,12 @@
                 }
             }
 
-            ariaNgLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? AriaNg will create same task after clicking OK.', 'info', function () {
+            WeDownloadLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? WeDownload will create same task after clicking OK.', 'info', function () {
                 $rootScope.loadPromise = aria2TaskService.retryTasks(retryableTasks, function (response) {
                     refreshGlobalStat(true);
 
-                    ariaNgLocalizationService.showInfo('Operation Result', '{{successCount}} tasks have been retried and {{failedCount}} tasks are failed.', function () {
-                        var actionAfterRetryingTask = ariaNgSettingService.getAfterRetryingTask();
+                    WeDownloadLocalizationService.showInfo('Operation Result', '{{successCount}} tasks have been retried and {{failedCount}} tasks are failed.', function () {
+                        var actionAfterRetryingTask = WeDownloadSettingService.getAfterRetryingTask();
 
                         if (response.hasSuccess) {
                             if (actionAfterRetryingTask === 'task-list-downloading') {
@@ -243,10 +243,10 @@
                 return;
             }
 
-            ariaNgLocalizationService.confirm('Confirm Remove', 'Are you sure you want to remove the selected task?', 'warning', function () {
+            WeDownloadLocalizationService.confirm('Confirm Remove', 'Are you sure you want to remove the selected task?', 'warning', function () {
                 $rootScope.loadPromise = aria2TaskService.removeTasks(tasks, function (response) {
                     if (response.hasError && tasks.length > 1) {
-                        ariaNgLocalizationService.showError('Failed to remove some task(s).');
+                        WeDownloadLocalizationService.showError('Failed to remove some task(s).');
                     }
 
                     if (!response.hasSuccess) {
@@ -267,7 +267,7 @@
         };
 
         $scope.clearStoppedTasks = function () {
-            ariaNgLocalizationService.confirm('Confirm Clear', 'Are you sure you want to clear stopped tasks?', 'warning', function () {
+            WeDownloadLocalizationService.confirm('Confirm Clear', 'Are you sure you want to clear stopped tasks?', 'warning', function () {
                 $rootScope.loadPromise = aria2TaskService.clearStoppedTasks(function (response) {
                     if (!response.success) {
                         return;
@@ -301,19 +301,19 @@
         };
 
         $scope.changeDisplayOrder = function (type, autoSetReverse) {
-            var oldType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getDisplayOrder());
-            var newType = ariaNgCommonService.parseOrderType(type);
+            var oldType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getDisplayOrder());
+            var newType = WeDownloadCommonService.parseOrderType(type);
 
             if (autoSetReverse && newType.type === oldType.type) {
                 newType.reverse = !oldType.reverse;
             }
 
-            ariaNgSettingService.setDisplayOrder(newType.getValue());
+            WeDownloadSettingService.setDisplayOrder(newType.getValue());
         };
 
         $scope.isSetDisplayOrder = function (type) {
-            var orderType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getDisplayOrder());
-            var targetType = ariaNgCommonService.parseOrderType(type);
+            var orderType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getDisplayOrder());
+            var targetType = WeDownloadCommonService.parseOrderType(type);
 
             return orderType.equals(targetType);
         };
@@ -330,20 +330,20 @@
                 return;
             }
 
-            ariaNgSettingService.setDefaultRpcSetting(setting);
+            WeDownloadSettingService.setDefaultRpcSetting(setting);
             $window.location.reload();
         };
 
-        if (ariaNgSettingService.getTitleRefreshInterval() > 0) {
+        if (WeDownloadSettingService.getTitleRefreshInterval() > 0) {
             pageTitleRefreshPromise = $interval(function () {
                 refreshPageTitle();
-            }, ariaNgSettingService.getTitleRefreshInterval());
+            }, weDownloadSettingService.getTitleRefreshInterval());
         }
 
-        if (ariaNgSettingService.getGlobalStatRefreshInterval() > 0) {
+        if (weDownloadSettingService.getGlobalStatRefreshInterval() > 0) {
             globalStatRefreshPromise = $interval(function () {
                 refreshGlobalStat(true);
-            }, ariaNgSettingService.getGlobalStatRefreshInterval());
+            }, weDownloadSettingService.getGlobalStatRefreshInterval());
         }
 
         $scope.$on('$destroy', function () {

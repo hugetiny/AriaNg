@@ -1,10 +1,10 @@
-# AriaNg
-[![License](https://img.shields.io/github/license/mayswind/AriaNg.svg?style=flat)](https://github.com/mayswind/AriaNg/blob/master/LICENSE)
-[![Lastest Build](https://img.shields.io/circleci/project/github/mayswind/AriaNg.svg?style=flat)](https://circleci.com/gh/mayswind/AriaNg/tree/master)
-[![Lastest Release](https://img.shields.io/github/release/mayswind/AriaNg.svg?style=flat)](https://github.com/mayswind/AriaNg/releases)
+# WeDownload
+[![License](https://img.shields.io/github/license/mayswind/WeDownload.svg?style=flat)](https://github.com/mayswind/WeDownload/blob/master/LICENSE)
+[![Lastest Build](https://img.shields.io/circleci/project/github/mayswind/WeDownload.svg?style=flat)](https://circleci.com/gh/mayswind/WeDownload/tree/master)
+[![Lastest Release](https://img.shields.io/github/release/mayswind/WeDownload.svg?style=flat)](https://github.com/mayswind/WeDownload/releases)
 
 ## Introduction
-AriaNg is a modern web frontend making [aria2](https://github.com/aria2/aria2) easier to use. AriaNg is written in pure html & javascript, thus it does not need any compilers or runtime environment. You can just put AriaNg in your web server and open it in your browser. AriaNg uses responsive layout, and supports any desktop or mobile devices.
+WeDownload is a modern web frontend making [aria2](https://github.com/aria2/aria2) easier to use. WeDownload is written in pure html & javascript, thus it does not need any compilers or runtime environment. You can just put WeDownload in your web server and open it in your browser. WeDownload uses responsive layout, and supports any desktop or mobile devices.
 
 ## Features
 1. Pure Html & Javascript, no runtime required
@@ -27,15 +27,15 @@ AriaNg is a modern web frontend making [aria2](https://github.com/aria2/aria2) e
 
 ## Screenshots
 #### Desktop
-![AriaNg](https://raw.githubusercontent.com/mayswind/AriaNg-WebSite/master/screenshots/desktop.png)
+![WeDownload](https://raw.githubusercontent.com/mayswind/WeDownload-WebSite/master/screenshots/desktop.png)
 #### Mobile Device
-![AriaNg](https://raw.githubusercontent.com/mayswind/AriaNg-WebSite/master/screenshots/mobile.png)
+![WeDownload](https://raw.githubusercontent.com/mayswind/WeDownload-WebSite/master/screenshots/mobile.png)
 
 ## Installation
 #### Prebuilt release
-Latest Release: [https://github.com/mayswind/AriaNg/releases](https://github.com/mayswind/AriaNg/releases)
+Latest Release: [https://github.com/mayswind/WeDownload/releases](https://github.com/mayswind/WeDownload/releases)
 
-Latest Daily Build: [https://github.com/mayswind/AriaNg-DailyBuild/archive/master.zip](https://github.com/mayswind/AriaNg-DailyBuild/archive/master.zip)
+Latest Daily Build: [https://github.com/mayswind/WeDownload-DailyBuild/archive/master.zip](https://github.com/mayswind/WeDownload-DailyBuild/archive/master.zip)
 
 #### Building from source
 Make sure you have [Node.js](https://nodejs.org/), [NPM](https://www.npmjs.com/) and [Gulp](https://gulpjs.com/) installed. Then download the source code, and follow these steps.
@@ -46,14 +46,14 @@ Make sure you have [Node.js](https://nodejs.org/), [NPM](https://www.npmjs.com/)
 The builds will be placed in the dist directory.
 
 #### Usage Notes
-Since AriaNg loads language resources asynchronously, you may not open index.html directly on the local file system to run AriaNg. It is recommended that you deploy AriaNg in a web container or download [AriaNg Native](https://github.com/mayswind/AriaNg-Native) that does not require a browser to run.
+Since WeDownload loads language resources asynchronously, you may not open index.html directly on the local file system to run WeDownload. It is recommended that you deploy WeDownload in a web container or download [WeDownload Native](https://github.com/mayswind/WeDownload-Native) that does not require a browser to run.
 
 ## Documents
-1. [English](http://ariang.mayswind.net)
-2. [Simplified Chinese (简体中文)](http://ariang.mayswind.net/zh_Hans)
+1. [English](http://WeDownload.mayswind.net)
+2. [Simplified Chinese (简体中文)](http://WeDownload.mayswind.net/zh_Hans)
 
 ## Demo
-Please visit [http://ariang.mayswind.net/latest](http://ariang.mayswind.net/latest)
+Please visit [http://WeDownload.mayswind.net/latest](http://WeDownload.mayswind.net/latest)
 
 ## License
-[MIT](https://github.com/mayswind/AriaNg/blob/master/LICENSE)
+[MIT](https://github.com/mayswind/WeDownload/blob/master/LICENSE)

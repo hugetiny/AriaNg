@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').filter('taskOrderBy', ['$filter', 'ariaNgCommonService', function ($filter, ariaNgCommonService) {
+    angular.module('weDownload').filter('taskOrderBy', ['$filter', 'WeDownloadCommonService', function ($filter, WeDownloadCommonService) {
         return function (array, type) {
             if (!angular.isArray(array)) {
                 return array;
             }
 
-            var orderType = ariaNgCommonService.parseOrderType(type);
+            var orderType = WeDownloadCommonService.parseOrderType(type);
 
             if (orderType === null) {
                 return array;

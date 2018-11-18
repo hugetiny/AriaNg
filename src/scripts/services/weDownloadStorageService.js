@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('ariaNgStorageService', ['$window', 'localStorageService', function ($window, localStorageService) {
+    angular.module('weDownload').factory('WeDownloadStorageService', ['$window', 'localStorageService', function ($window, localStorageService) {
         return {
             isLocalStorageSupported: function () {
                 return localStorageService.isSupported;

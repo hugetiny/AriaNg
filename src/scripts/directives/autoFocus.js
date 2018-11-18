@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngAutoFocus', ['$timeout', function ($timeout) {
+    angular.module('weDownload').directive('ngAutoFocus', ['$timeout', function ($timeout) {
         return {
             restrict: 'A',
             link: function (scope, element) {

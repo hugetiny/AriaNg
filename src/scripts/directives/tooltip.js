@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngTooltip', function () {
+    angular.module('weDownload').directive('ngTooltip', function () {
         return {
             restrict: 'A',
             scope: {

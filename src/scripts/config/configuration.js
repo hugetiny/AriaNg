@@ -1,23 +1,23 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').config(['$qProvider', '$translateProvider', 'localStorageServiceProvider', 'NotificationProvider', 'ariaNgConstants', 'ariaNgLanguages', function ($qProvider, $translateProvider, localStorageServiceProvider, NotificationProvider, ariaNgConstants, ariaNgLanguages) {
+    angular.module('weDownload').config(['$qProvider', '$translateProvider', 'localStorageServiceProvider', 'NotificationProvider', 'WeDownloadConstants', 'WeDownloadLanguages', function ($qProvider, $translateProvider, localStorageServiceProvider, NotificationProvider, WeDownloadConstants, WeDownloadLanguages) {
         $qProvider.errorOnUnhandledRejections(false);
 
         localStorageServiceProvider
-            .setPrefix(ariaNgConstants.appPrefix)
+            .setPrefix(WeDownloadConstants.appPrefix)
             .setStorageType('localStorage')
             .setStorageCookie(365, '/');
 
         var supportedLangs = [];
         var languageAliases = {};
 
-        for (var langName in ariaNgLanguages) {
-            if (!ariaNgLanguages.hasOwnProperty(langName)) {
+        for (var langName in WeDownloadLanguages) {
+            if (!WeDownloadLanguages.hasOwnProperty(langName)) {
                 continue;
             }
 
-            var language = ariaNgLanguages[langName];
+            var language = WeDownloadLanguages[langName];
             var aliases = language.aliases;
 
             supportedLangs.push(langName);
@@ -32,14 +32,14 @@
             }
         }
 
-        $translateProvider.useLoader('ariaNgLanguageLoader')
+        $translateProvider.useLoader('WeDownloadLanguageLoader')
             .useLoaderCache(true)
             .registerAvailableLanguageKeys(supportedLangs, languageAliases)
-            .fallbackLanguage(ariaNgConstants.defaultLanguage)
+            .fallbackLanguage(WeDownloadConstants.defaultLanguage)
             .useSanitizeValueStrategy('escapeParameters');
 
         NotificationProvider.setOptions({
-            delay: ariaNgConstants.notificationInPageTimeout
+            delay: WeDownloadConstants.notificationInPageTimeout
         });
     }]);
 }());

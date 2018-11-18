@@ -35,7 +35,7 @@ class New extends Component {
                             <span className="caret"></span>
                         </button>
                         <ul className="dropdown-menu right-align">
-                            <li><a className="pointer-cursor" onClick={startDownload(true)} translate>Manual Download</a></li>
+                            <li><a className="pointer-cursor" onClick={startDownload(true)} translate>Download Later</a></li>
                         </ul>
                     </div>
                 </li>

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('ariaNgLanguageLoader', ['$http', '$q', 'ariaNgConstants', 'ariaNgLanguages', 'ariaNgNotificationService', 'ariaNgLogService', 'ariaNgStorageService', function ($http, $q, ariaNgConstants, ariaNgLanguages, ariaNgNotificationService, ariaNgLogService, ariaNgStorageService) {
+    angular.module('weDownload').factory('weDownloadLanguageLoader', ['$http', '$q', 'weDownloadConstants', 'weDownloadLanguages', 'weDownloadNotificationService', 'weDownloadLogService', 'weDownloadStorageService', function ($http, $q, weDownloadConstants, weDownloadLanguages, weDownloadNotificationService, weDownloadLogService, weDownloadStorageService) {
         var getKeyValuePair = function (line) {
             for (var i = 0; i < line.length; i++) {
                 if (i > 0 && line.charAt(i - 1) !== '\\' && line.charAt(i) === '=') {
@@ -84,30 +84,30 @@
         return function (options) {
             var deferred = $q.defer();
 
-            if (!ariaNgLanguages[options.key]) {
+            if (!weDownloadLanguages[options.key]) {
                 deferred.reject(options.key);
                 return deferred.promise;
             }
 
-            var languageKey = ariaNgConstants.languageStorageKeyPrefix + '.' + options.key;
-            var languageResource = ariaNgStorageService.get(languageKey);
+            var languageKey = weDownloadConstants.languageStorageKeyPrefix + '.' + options.key;
+            var languageResource = weDownloadStorageService.get(languageKey);
 
             if (languageResource) {
                 deferred.resolve(languageResource);
             }
 
-            var languagePath = ariaNgConstants.languagePath + '/' + options.key + ariaNgConstants.languageFileExtension;
+            var languagePath = weDownloadConstants.languagePath + '/' + options.key + weDownloadConstants.languageFileExtension;
 
             $http({
                 url: languagePath,
                 method: 'GET'
             }).then(function onSuccess(response) {
                 var languageObject = getLanguageObject(response.data);
-                ariaNgStorageService.set(languageKey, languageObject);
+                weDownloadStorageService.set(languageKey, languageObject);
                 return deferred.resolve(languageObject);
             }).catch(function onError(response) {
-                ariaNgLogService.warn('[ariaNgLanguageLoader] cannot get language resource');
-                ariaNgNotificationService.notifyInPage('', 'AriaNg cannot get language resources, and will display in default language.', {
+                weDownloadLogService.warn('[weDownloadLanguageLoader] cannot get language resource');
+                weDownloadNotificationService.notifyInPage('', 'WeDownload cannot get language resources, and will display in default language.', {
                     type: 'error',
                     delay: false
                 });

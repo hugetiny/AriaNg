@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').controller('TaskDetailController', ['$rootScope', '$scope', '$routeParams', '$interval', 'clipboard', 'aria2RpcErrors', 'ariaNgFileTypes', 'ariaNgCommonService', 'ariaNgSettingService', 'ariaNgMonitorService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $routeParams, $interval, clipboard, aria2RpcErrors, ariaNgFileTypes, ariaNgCommonService, ariaNgSettingService, ariaNgMonitorService, aria2TaskService, aria2SettingService) {
+    angular.module('weDownload').controller('TaskDetailController', ['$rootScope', '$scope', '$routeParams', '$interval', 'clipboard', 'aria2RpcErrors', 'WeDownloadFileTypes', 'WeDownloadCommonService', 'WeDownloadSettingService', 'WeDownloadMonitorService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $routeParams, $interval, clipboard, aria2RpcErrors, WeDownloadFileTypes, WeDownloadCommonService, WeDownloadSettingService, WeDownloadMonitorService, aria2TaskService, aria2SettingService) {
         var tabOrders = ['overview', 'blocks', 'filelist', 'btpeers'];
         var downloadTaskRefreshPromise = null;
         var pauseDownloadTaskRefresh = false;
@@ -30,13 +30,13 @@
                 $scope.context.availableOptions = getAvailableOptions(task.status, !!task.bittorrent);
             }
 
-            $scope.task = ariaNgCommonService.copyObjectTo(task, $scope.task);
+            $scope.task = WeDownloadCommonService.copyObjectTo(task, $scope.task);
 
             $rootScope.taskContext.list = [$scope.task];
             $rootScope.taskContext.selected = {};
             $rootScope.taskContext.selected[$scope.task.gid] = true;
 
-            ariaNgMonitorService.recordStat(task.gid, task);
+            WeDownloadMonitorService.recordStat(task.gid, task);
         };
 
         var processPeers = function (peers) {
@@ -44,7 +44,7 @@
                 return;
             }
 
-            if (!ariaNgCommonService.extendArray(peers, $scope.context.btPeers, 'peerId')) {
+            if (!WeDownloadCommonService.extendArray(peers, $scope.context.btPeers, 'peerId')) {
                 $scope.context.btPeers = peers;
             }
 
@@ -192,14 +192,14 @@
 
         $scope.context = {
             currentTab: 'overview',
-            isEnableSpeedChart: ariaNgSettingService.getDownloadTaskRefreshInterval() > 0,
+            isEnableSpeedChart: WeDownloadSettingService.getDownloadTaskRefreshInterval() > 0,
             showChooseFilesToolbar: false,
             fileExtensions: [],
             collapsedDirs: {},
             btPeers: [],
             healthPercent: 0,
             collapseTrackers: true,
-            statusData: ariaNgMonitorService.getEmptyStatsData($routeParams.gid),
+            statusData: WeDownloadMonitorService.getEmptyStatsData($routeParams.gid),
             availableOptions: [],
             options: []
         };
@@ -239,19 +239,19 @@
                 return;
             }
 
-            var oldType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getFileListDisplayOrder());
-            var newType = ariaNgCommonService.parseOrderType(type);
+            var oldType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getFileListDisplayOrder());
+            var newType = WeDownloadCommonService.parseOrderType(type);
 
             if (autoSetReverse && newType.type === oldType.type) {
                 newType.reverse = !oldType.reverse;
             }
 
-            ariaNgSettingService.setFileListDisplayOrder(newType.getValue());
+            WeDownloadSettingService.setFileListDisplayOrder(newType.getValue());
         };
 
         $scope.isSetFileListDisplayOrder = function (type) {
-            var orderType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getFileListDisplayOrder());
-            var targetType = ariaNgCommonService.parseOrderType(type);
+            var orderType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getFileListDisplayOrder());
+            var targetType = WeDownloadCommonService.parseOrderType(type);
 
             return orderType.equals(targetType);
         };
@@ -261,7 +261,7 @@
                 return null;
             }
 
-            return ariaNgSettingService.getFileListDisplayOrder();
+            return WeDownloadSettingService.getFileListDisplayOrder();
         };
 
         $scope.showChooseFilesToolbar = function () {
@@ -338,12 +338,12 @@
         };
 
         $scope.chooseSpecifiedFiles = function (type) {
-            if (!$scope.task || !$scope.task.files || !ariaNgFileTypes[type]) {
+            if (!$scope.task || !$scope.task.files || !WeDownloadFileTypes[type]) {
                 return;
             }
 
             var files = $scope.task.files;
-            var extensions = ariaNgFileTypes[type].extensions;
+            var extensions = WeDownloadFileTypes[type].extensions;
             var fileIndexes = [];
             var isAllSelected = true;
 
@@ -354,7 +354,7 @@
                     continue;
                 }
 
-                var extension = ariaNgCommonService.getFileExtension(file.fileName);
+                var extension = WeDownloadCommonService.getFileExtension(file.fileName);
 
                 if (extension) {
                     extension = extension.toLowerCase();
@@ -411,7 +411,7 @@
                     continue;
                 }
 
-                var extension = ariaNgCommonService.getFileExtension(file.fileName);
+                var extension = WeDownloadCommonService.getFileExtension(file.fileName);
 
                 if (extension) {
                     extension = extension.toLowerCase();
@@ -447,13 +447,13 @@
 
             var allClassifiedExtensions = {};
 
-            for (var type in ariaNgFileTypes) {
-                if (!ariaNgFileTypes.hasOwnProperty(type)) {
+            for (var type in WeDownloadFileTypes) {
+                if (!WeDownloadFileTypes.hasOwnProperty(type)) {
                     continue;
                 }
 
-                var extensionTypeName = ariaNgFileTypes[type].name;
-                var allExtensions = ariaNgFileTypes[type].extensions;
+                var extensionTypeName = WeDownloadFileTypes[type].name;
+                var allExtensions = WeDownloadFileTypes[type].extensions;
                 var extensions = [];
 
                 for (var i = 0; i < allExtensions.length; i++) {
@@ -513,7 +513,7 @@
                     continue;
                 }
 
-                var extension = ariaNgCommonService.getFileExtension(file.fileName);
+                var extension = WeDownloadCommonService.getFileExtension(file.fileName);
 
                 if (extension) {
                     extension = extension.toLowerCase();
@@ -571,25 +571,25 @@
         };
 
         $scope.changePeerListDisplayOrder = function (type, autoSetReverse) {
-            var oldType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getPeerListDisplayOrder());
-            var newType = ariaNgCommonService.parseOrderType(type);
+            var oldType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getPeerListDisplayOrder());
+            var newType = WeDownloadCommonService.parseOrderType(type);
 
             if (autoSetReverse && newType.type === oldType.type) {
                 newType.reverse = !oldType.reverse;
             }
 
-            ariaNgSettingService.setPeerListDisplayOrder(newType.getValue());
+            WeDownloadSettingService.setPeerListDisplayOrder(newType.getValue());
         };
 
         $scope.isSetPeerListDisplayOrder = function (type) {
-            var orderType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getPeerListDisplayOrder());
-            var targetType = ariaNgCommonService.parseOrderType(type);
+            var orderType = WeDownloadCommonService.parseOrderType(WeDownloadSettingService.getPeerListDisplayOrder());
+            var targetType = WeDownloadCommonService.parseOrderType(type);
 
             return orderType.equals(targetType);
         };
 
         $scope.getPeerListOrderType = function () {
-            return ariaNgSettingService.getPeerListDisplayOrder();
+            return WeDownloadSettingService.getPeerListDisplayOrder();
         };
 
         $scope.loadTaskOption = function (task) {
@@ -630,7 +630,7 @@
             clipboard.copyText(info);
         };
 
-        if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
+        if (WeDownloadSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 if ($scope.task && ($scope.task.status === 'complete' || $scope.task.status === 'error' || $scope.task.status === 'removed')) {
                     $interval.cancel(downloadTaskRefreshPromise);
@@ -638,7 +638,7 @@
                 }
 
                 refreshDownloadTask(true);
-            }, ariaNgSettingService.getDownloadTaskRefreshInterval());
+            }, WeDownloadSettingService.getDownloadTaskRefreshInterval());
         }
 
         $scope.$on('$destroy', function () {

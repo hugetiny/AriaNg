@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('aria2WebSocketRpcService', ['$q', '$websocket', 'ariaNgSettingService', 'ariaNgLogService', function ($q, $websocket, ariaNgSettingService, ariaNgLogService) {
-        var rpcUrl = ariaNgSettingService.getCurrentRpcUrl();
+    angular.module('weDownload').factory('aria2WebSocketRpcService', ['$q', '$websocket', 'WeDownloadSettingService', 'WeDownloadLogService', function ($q, $websocket, WeDownloadSettingService, WeDownloadLogService) {
+        var rpcUrl = WeDownloadSettingService.getCurrentRpcUrl();
         var socketClient = null;
 
         var sendIdStates = {};
@@ -29,13 +29,13 @@
             });
 
             if (content.result && context.successCallback) {
-                ariaNgLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response success', content);
+                WeDownloadLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response success', content);
 
                 context.successCallback(context.id, content.result);
             }
 
             if (content.error && context.errorCallback) {
-                ariaNgLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response error', content);
+                WeDownloadLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response error', content);
 
                 context.errorCallback(context.id, content.error);
             }
@@ -110,7 +110,7 @@
                 var uniqueId = context.uniqueId;
                 var requestBody = angular.toJson(context.requestBody);
 
-                ariaNgLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'request start', context);
+                WeDownloadLogService.debug('[aria2WebSocketRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'request start', context);
 
                 var deferred = $q.defer();
 
@@ -127,7 +127,7 @@
                         context: context
                     });
 
-                    ariaNgLogService.debug('[aria2WebSocketRpcService.request] client error', client);
+                    WeDownloadLogService.debug('[aria2WebSocketRpcService.request] client error', client);
                     context.errorCallback(context.id, { message: client.error });
                 }
 

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').constant('aria2Errors', {
+    angular.module('weDownload').constant('aria2Errors', {
         //'0': { }, //All downloads were successful.
         '1': {
             descriptionKey: 'error.unknown'

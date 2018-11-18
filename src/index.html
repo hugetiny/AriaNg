@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--<html ng-app="ariaNg" manifest="index.manifest">-->
-<html ng-app="ariaNg">
+<!--<html ng-app="WeDownload" manifest="index.manifest">-->
+<html ng-app="weDownload">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -8,14 +8,14 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" name="viewport">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-title" content="AriaNg"/>
+    <meta name="apple-mobile-web-app-title" content="WeDownload"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="msapplication-TileColor" content="#3c4852">
     <meta name="msapplication-TileImage" content="tileicon.png">
-    <meta name="description" content="AriaNg, a modern web frontend making aria2 easier to use.">
+    <meta name="description" content="WeDownload, a modern web frontend making aria2 easier to use.">
     <meta name="theme-color" content="#3c4852">
     <meta name="format-detection" content="telephone=no"/>
-    <title>AriaNg</title>
+    <title>WeDownload</title>
     <link rel="icon" href="favicon.png">
     <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
     <link rel="apple-touch-icon" href="touchicon.png">
@@ -45,16 +45,31 @@
     <link rel="stylesheet" href="styles/controls/angular-promise-buttons.css"/>
     <link rel="stylesheet" href="styles/theme/dark.css">
     <!-- endbuild -->
+    <script>
+
+        // 重命名 Electron 提供的 require
+
+        window.nodeRequire = require;
+
+        delete window.require;
+
+        delete window.exports;
+
+        delete window.module;
+
+    </script>
+
+
 </head>
 <body class="hold-transition dark sidebar-mini fixed">
 <div class="wrapper" ng-controller="MainController" ng-swipe-left="swipeActions.leftSwipe()" ng-swipe-right="swipeActions.rightSwipe()" ng-swipe-disable-mouse>
     <header class="main-header">
         <div class="logo">
-            <div class="logo-mini">AriaNg</div>
-            <div class="logo-lg" title="AriaNg %%GULP_INJECT_VERSION%%">
+            <div class="logo-mini">WeDownload</div>
+            <div class="logo-lg" title="download everything">
                 <div class="dropdown">
                     <!--<span class="dropdown-toggle" data-toggle="dropdown">-->
-                        <span class="logo-lg-title">AriaNg</span>
+                        <span class="logo-lg-title">WeDownload</span>
                     <!--<i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half" aria-hidden="true"></i>-->
                     <!--</span>-->
                     <!--<ul class="dropdown-menu dropdown-menu-right rpcselect-dropdown" role="menu">-->
@@ -176,7 +191,7 @@
                     </li>
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
-                        <!--<a class="toolbar" title="{{'Help' | translate}}" href="http://github.com/mayswind/AriaNg" target="_blank">-->
+                        <!--<a class="toolbar" title="{{'Help' | translate}}" href="http://github.com/mayswind/WeDownload" target="_blank">-->
                             <!--<i class="fa fa-question-circle-o"></i>-->
                         <!--</a>-->
                     <!--</li>-->
@@ -200,8 +215,8 @@
                     <a href="#!/stopped"><i class="fa fa-check-circle-o"></i> <span ng-bind="('Finished / Stopped' | translate) + (globalStat && globalStat.numStopped > 0 ? ' (' + globalStat.numStopped + ')' : '')">Finished / Stopped</span></a>
                 </li>
                 <li class="header" translate>Settings</li>
-                <li data-href-match="/settings/ariang">
-                    <a href="#!/settings/ariang"><i class="fa fa-cog"></i> <span translate>AriaNg Settings</span></a>
+                <li data-href-match="/settings/WeDownload">
+                    <a href="#!/settings/WeDownload"><i class="fa fa-cog"></i> <span translate>WeDownload Settings</span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0);">
@@ -239,7 +254,7 @@
                     </ul>
                 </li>
                 <li class="ng-cloak" data-href-match="/debug" ng-if="enableDebugMode()">
-                    <a href="#!/debug"><i class="fa fa-wrench"></i> <span translate>AriaNg Debug Console</span></a>
+                    <a href="#!/debug"><i class="fa fa-wrench"></i> <span translate>WeDownload Debug Console</span></a>
                 </li>
                 <li data-href-match="/status">
                     <a href="#!/status">
@@ -369,7 +384,7 @@
 <script src="scripts/controllers/new.js"></script>
 <script src="scripts/controllers/list.js"></script>
 <script src="scripts/controllers/task-detail.js"></script>
-<script src="scripts/controllers/settings-ariang.js"></script>
+<script src="scripts/controllers/settings-wedownload.js"></script>
 <script src="scripts/controllers/settings-aria2.js"></script>
 <script src="scripts/controllers/status.js"></script>
 <script src="scripts/directives/autoFocus.js"></script>
@@ -392,16 +407,16 @@
 <script src="scripts/filters/taskOrderBy.js"></script>
 <script src="scripts/filters/taskStatus.js"></script>
 <script src="scripts/filters/volume.js"></script>
-<script src="scripts/services/ariaNgLanguageLoader.js"></script>
-<script src="scripts/services/ariaNgCommonService.js"></script>
-<script src="scripts/services/ariaNgNotificationService.js"></script>
-<script src="scripts/services/ariaNgLocalizationService.js"></script>
-<script src="scripts/services/ariaNgLogService.js"></script>
-<script src="scripts/services/ariaNgStorageService.js"></script>
-<script src="scripts/services/ariaNgFileService.js"></script>
-<script src="scripts/services/ariaNgSettingService.js"></script>
-<script src="scripts/services/ariaNgMonitorService.js"></script>
-<script src="scripts/services/ariaNgTitleService.js"></script>
+<script src="scripts/services/weDownloadLanguageLoader.js"></script>
+<script src="scripts/services/weDownloadCommonService.js"></script>
+<script src="scripts/services/weDownloadNotificationService.js"></script>
+<script src="scripts/services/weDownloadLocalizationService.js"></script>
+<script src="scripts/services/weDownloadLogService.js"></script>
+<script src="scripts/services/weDownloadStorageService.js"></script>
+<script src="scripts/services/weDownloadFileService.js"></script>
+<script src="scripts/services/weDownloadSettingService.js"></script>
+<script src="scripts/services/weDownloadMonitorService.js"></script>
+<script src="scripts/services/weDownloadTitleService.js"></script>
 <script src="scripts/services/aria2HttpRpcService.js"></script>
 <script src="scripts/services/aria2WebSocketRpcService.js"></script>
 <script src="scripts/services/aria2RpcService.js"></script>

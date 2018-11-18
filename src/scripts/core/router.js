@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').config(['$routeProvider', function ($routeProvider) {
+    angular.module('weDownload').config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/downloading', {
                 templateUrl: 'views/list.html',
@@ -27,13 +27,13 @@
                 templateUrl: 'views/task-detail.html',
                 controller: 'TaskDetailController'
             })
-            .when('/settings/ariang', {
-                templateUrl: 'views/settings-ariang.html',
-                controller: 'AriaNgSettingsController'
+            .when('/settings/WeDownload', {
+                templateUrl: 'views/settings-WeDownload.html',
+                controller: 'WeDownloadSettingsController'
             })
-            .when('/settings/ariang/:extendType', {
-                templateUrl: 'views/settings-ariang.html',
-                controller: 'AriaNgSettingsController'
+            .when('/settings/WeDownload/:extendType', {
+                templateUrl: 'views/settings-WeDownload.html',
+                controller: 'WeDownloadSettingsController'
             })
             .when('/settings/aria2/basic', {
                 templateUrl: 'views/settings-aria2.html',
@@ -77,7 +77,7 @@
             })
             .when('/debug', {
                 templateUrl: 'views/debug.html',
-                controller: 'AriaNgDebugController'
+                controller: 'WeDownloadDebugController'
             })
             .when('/status', {
                 templateUrl: 'views/status.html',

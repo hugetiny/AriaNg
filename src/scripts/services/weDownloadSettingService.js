@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('ariaNgSettingService', ['$window', '$location', '$filter', 'ariaNgConstants', 'ariaNgDefaultOptions', 'ariaNgLanguages', 'ariaNgCommonService', 'ariaNgLogService', 'ariaNgStorageService', function ($window, $location, $filter, ariaNgConstants, ariaNgDefaultOptions, ariaNgLanguages, ariaNgCommonService, ariaNgLogService, ariaNgStorageService) {
+    angular.module('weDownload').factory('WeDownloadSettingService', ['$window', '$location', '$filter', 'WeDownloadConstants', 'WeDownloadDefaultOptions', 'WeDownloadLanguages', 'WeDownloadCommonService', 'WeDownloadLogService', 'WeDownloadStorageService', function ($window, $location, $filter, WeDownloadConstants, WeDownloadDefaultOptions, WeDownloadLanguages, WeDownloadCommonService, WeDownloadLogService, WeDownloadStorageService) {
         var browserFeatures = (function () {
-            var supportLocalStroage = ariaNgStorageService.isLocalStorageSupported();
-            var supportCookies = ariaNgStorageService.isCookiesSupported();
+            var supportLocalStroage = WeDownloadStorageService.isLocalStorageSupported();
+            var supportCookies = WeDownloadStorageService.isCookiesSupported();
 
             return {
                 localStroage: supportLocalStroage,
@@ -43,12 +43,12 @@
         };
 
         var getLanguageNameFromAlias = function (alias) {
-            for (var langName in ariaNgLanguages) {
-                if (!ariaNgLanguages.hasOwnProperty(langName)) {
+            for (var langName in WeDownloadLanguages) {
+                if (!WeDownloadLanguages.hasOwnProperty(langName)) {
                     continue;
                 }
 
-                var language = ariaNgLanguages[langName];
+                var language = WeDownloadLanguages[langName];
                 var aliases = language.aliases;
 
                 if (!angular.isArray(aliases) || aliases.length < 1) {
@@ -69,12 +69,12 @@
             var browserLang = $window.navigator.browserLanguage ? $window.navigator.browserLanguage : $window.navigator.language;
 
             if (!browserLang) {
-                return ariaNgDefaultOptions.language;
+                return WeDownloadDefaultOptions.language;
             }
 
             browserLang = browserLang.replace(/\-/g, '_');
 
-            if (!ariaNgLanguages[browserLang]) {
+            if (!WeDownloadLanguages[browserLang]) {
                 var languageName = getLanguageNameFromAlias(browserLang);
 
                 if (languageName) {
@@ -82,8 +82,8 @@
                 }
             }
 
-            if (!ariaNgLanguages[browserLang]) {
-                return ariaNgDefaultOptions.language;
+            if (!WeDownloadLanguages[browserLang]) {
+                return WeDownloadDefaultOptions.language;
             }
 
             return browserLang;
@@ -106,22 +106,22 @@
                 return currentHost;
             }
 
-            return ariaNgConstants.defaultHost;
+            return WeDownloadConstants.defaultHost;
         };
 
         var setOptions = function (options) {
-            return ariaNgStorageService.set(ariaNgConstants.optionStorageKey, options);
+            return WeDownloadStorageService.set(WeDownloadConstants.optionStorageKey, options);
         };
 
         var getOptions = function () {
-            var options = ariaNgStorageService.get(ariaNgConstants.optionStorageKey);
+            var options = WeDownloadStorageService.get(WeDownloadConstants.optionStorageKey);
 
-            if (options && !ariaNgLanguages[options.language]) {
+            if (options && !WeDownloadLanguages[options.language]) {
                 options.language = getLanguageNameFromAliasOrDefaultLanguage(options.language);
             }
 
             if (!options) {
-                options = angular.extend({}, ariaNgDefaultOptions);
+                options = angular.extend({}, WeDownloadDefaultOptions);
                 options.language = getDefaultLanguage();
 
                 if (!options.rpcHost) {
@@ -146,14 +146,14 @@
         };
 
         var clearAll = function () {
-            return ariaNgStorageService.clearAll();
+            return WeDownloadStorageService.clearAll();
         };
 
         var getOption = function (key) {
             var options = getOptions();
 
-            if (angular.isUndefined(options[key]) && angular.isDefined(ariaNgDefaultOptions[key])) {
-                options[key] = ariaNgDefaultOptions[key];
+            if (angular.isUndefined(options[key]) && angular.isDefined(WeDownloadDefaultOptions[key])) {
+                options[key] = WeDownloadDefaultOptions[key];
                 setOptions(options);
             }
 
@@ -171,7 +171,7 @@
             setting.rpcHost = getDefaultRpcHost();
 
             if (isInsecureProtocolDisabled()) {
-                setting.protocol = ariaNgConstants.defaultSecureProtocol;
+                setting.protocol = WeDownloadConstants.defaultSecureProtocol;
             }
         };
 
@@ -188,8 +188,8 @@
         };
 
         var createNewRpcSetting = function () {
-            var setting = cloneRpcSetting(ariaNgDefaultOptions);
-            setting.rpcId = ariaNgCommonService.generateUniqueId();
+            var setting = cloneRpcSetting(WeDownloadDefaultOptions);
+            setting.rpcId = WeDownloadCommonService.generateUniqueId();
 
             initRpcSettingWithDefaultHostAndProtocol(setting);
 
@@ -204,10 +204,10 @@
                 return browserFeatures;
             },
             getAllOptions: function () {
-                var options = angular.extend({}, ariaNgDefaultOptions, getOptions());
+                var options = angular.extend({}, WeDownloadDefaultOptions, getOptions());
 
                 if (options.secret) {
-                    options.secret = ariaNgCommonService.base64Decode(options.secret);
+                    options.secret = WeDownloadCommonService.base64Decode(options.secret);
                 }
 
                 if (angular.isArray(options.extendRpcServers)) {
@@ -215,7 +215,7 @@
                         var rpcSetting = options.extendRpcServers[i];
 
                         if (rpcSetting.secret) {
-                            rpcSetting.secret = ariaNgCommonService.base64Decode(rpcSetting.secret);
+                            rpcSetting.secret = WeDownloadCommonService.base64Decode(rpcSetting.secret);
                         }
                     }
                 }
@@ -252,7 +252,7 @@
                 return result;
             },
             importAllOptions: function (options) {
-                var finalOptions = angular.copy(ariaNgDefaultOptions);
+                var finalOptions = angular.copy(WeDownloadDefaultOptions);
 
                 for (var key in options) {
                     if (!options.hasOwnProperty(key) || !finalOptions.hasOwnProperty(key)) {
@@ -290,7 +290,7 @@
                 setOptions(finalOptions);
             },
             exportAllOptions: function () {
-                var options = angular.extend({}, ariaNgDefaultOptions, getOptions());
+                var options = angular.extend({}, WeDownloadDefaultOptions, getOptions());
 
                 return options;
             },
@@ -304,7 +304,7 @@
                 return getOption('language');
             },
             setLanguage: function (value) {
-                if (!ariaNgLanguages[value]) {
+                if (!WeDownloadLanguages[value]) {
                     return false;
                 }
 
@@ -316,7 +316,7 @@
             },
             setDebugMode: function (value) {
                 sessionSettings.debugMode = value;
-                ariaNgLogService.setEnableDebugLog(value);
+                WeDownloadLogService.setEnableDebugLog(value);
             },
             getTitle: function () {
                 return getOption('title');
@@ -360,17 +360,17 @@
             setAfterCreatingNewTask: function (value) {
                 setOption('afterCreatingNewTask', value);
             },
-            getRemoveOldTaskAfterRetrying: function () {
-                return getOption('removeOldTaskAfterRetrying');
+            getRemoveOldTaskAfterRestarting: function () {
+                return getOption('removeOldTaskAfterRestarting');
             },
-            setRemoveOldTaskAfterRetrying: function (value) {
-                setOption('removeOldTaskAfterRetrying', value);
+            setRemoveOldTaskAfterRestarting: function (value) {
+                setOption('removeOldTaskAfterRestarting', value);
             },
-            getAfterRetryingTask: function () {
-                return getOption('afterRetryingTask');
+            getAfterRestartingTask: function () {
+                return getOption('afterRestartingTask');
             },
-            setAfterRetryingTask: function (value) {
-                setOption('afterRetryingTask', value);
+            setAfterRestartingTask: function (value) {
+                setOption('afterRestartingTask', value);
             },
             getCurrentRpcDisplayName: function () {
                 var options = getOptions();
@@ -403,7 +403,7 @@
             },
             getCurrentRpcSecret: function () {
                 var value = getOption('secret');
-                return (value ? ariaNgCommonService.base64Decode(value) : value);
+                return (value ? WeDownloadCommonService.base64Decode(value) : value);
             },
             addNewRpcSetting: function () {
                 var options = getOptions();
@@ -436,7 +436,7 @@
                     value = Math.max(parseInt(value), 0);
                 } else if (field === 'secret') {
                     if (value) {
-                        value = ariaNgCommonService.base64Encode(value);
+                        value = weDownloadCommonService.base64Encode(value);
                     }
                 }
 
@@ -489,7 +489,7 @@
 
                 var options = getOptions();
                 var currentSetting = cloneRpcSetting(options);
-                currentSetting.rpcId = ariaNgCommonService.generateUniqueId();
+                currentSetting.rpcId = weDownloadCommonService.generateUniqueId();
 
                 if (!angular.isArray(options.extendRpcServers)) {
                     options.extendRpcServers = [];
@@ -509,7 +509,7 @@
                     newDefaultSetting = cloneRpcSetting(setting);
 
                     if (newDefaultSetting.secret) {
-                        newDefaultSetting.secret = ariaNgCommonService.base64Encode(newDefaultSetting.secret);
+                        newDefaultSetting.secret = weDownloadCommonService.base64Encode(newDefaultSetting.secret);
                     }
                 }
 

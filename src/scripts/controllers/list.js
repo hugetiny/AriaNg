@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').controller('DownloadListController', ['$rootScope', '$scope', '$window', '$location', '$route', '$interval', 'dragulaService', 'aria2RpcErrors', 'ariaNgCommonService', 'ariaNgSettingService', 'aria2TaskService', function ($rootScope, $scope, $window, $location, $route, $interval, dragulaService, aria2RpcErrors, ariaNgCommonService, ariaNgSettingService, aria2TaskService) {
+    angular.module('weDownload').controller('DownloadListController', ['$rootScope', '$scope', '$window', '$location', '$route', '$interval', 'dragulaService', 'aria2RpcErrors', 'weDownloadCommonService', 'weDownloadSettingService', 'aria2TaskService', function ($rootScope, $scope, $window, $location, $route, $interval, dragulaService, aria2RpcErrors, weDownloadCommonService, weDownloadSettingService, aria2TaskService) {
         var location = $location.path().substring(1);
         var downloadTaskRefreshPromise = null;
         var pauseDownloadTaskRefresh = false;
@@ -32,7 +32,7 @@
                     $rootScope.taskContext.list = taskList;
                     needRequestWholeInfo = false;
                 } else {
-                    if (ariaNgCommonService.extendArray(taskList, $rootScope.taskContext.list, 'gid')) {
+                    if (weDownloadCommonService.extendArray(taskList, $rootScope.taskContext.list, 'gid')) {
                         needRequestWholeInfo = false;
                     } else {
                         needRequestWholeInfo = true;
@@ -79,19 +79,19 @@
         };
 
         $scope.getOrderType = function () {
-            return ariaNgSettingService.getDisplayOrder();
+            return weDownloadSettingService.getDisplayOrder();
         };
 
         $scope.isSupportDragTask = function () {
-            var displayOrder = ariaNgCommonService.parseOrderType(ariaNgSettingService.getDisplayOrder());
+            var displayOrder = weDownloadCommonService.parseOrderType(weDownloadSettingService.getDisplayOrder());
 
             return location === 'waiting' && displayOrder.type === 'default';
         };
 
-        if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
+        if (weDownloadSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 refreshDownloadTask(true);
-            }, ariaNgSettingService.getDownloadTaskRefreshInterval());
+            }, weDownloadSettingService.getDownloadTaskRefreshInterval());
         }
 
         dragulaService.options($scope, 'task-list', {

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngIndeterminate', function () {
+    angular.module('weDownload').directive('ngIndeterminate', function () {
         return {
             restrict: 'A',
             scope: {

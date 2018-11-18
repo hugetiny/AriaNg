@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngPieceBar', ['aria2TaskService', function (aria2TaskService) {
+    angular.module('weDownload').directive('ngPieceBar', ['aria2TaskService', function (aria2TaskService) {
         return {
             restrict: 'E',
             template: '<canvas class="piece-bar progress"></canvas>',

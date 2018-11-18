@@ -26,7 +26,7 @@ gulp.task('views', function () {
     return gulp.src([
         'src/views/**/*.html'
     ]).pipe($.htmlmin({collapseWhitespace: true}))
-        .pipe($.angularTemplatecache({module: 'ariaNg', filename: 'views/templates.js', root: 'views/'}))
+        .pipe($.angularTemplatecache({module: 'WeDownload', filename: 'views/templates.js', root: 'views/'}))
         .pipe(gulp.dest('.tmp/scripts'));
 });
 

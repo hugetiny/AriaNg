@@ -1,7 +1,7 @@
  (function () {
     'use strict';
 
-    angular.module('ariaNg').constant('ariaNgFileTypes', {
+    angular.module('weDownload').constant('weDownloadFileTypes', {
         video: {
             name: 'Videos',
             extensions: [

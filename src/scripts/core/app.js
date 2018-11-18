@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var ariaNg = angular.module('ariaNg', [
+    var weDownload = angular.module('weDownload', [
         'ngRoute',
         'ngSanitize',
         'ngTouch',

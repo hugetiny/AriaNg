@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngSettingDialog', ['ariaNgLocalizationService', 'aria2SettingService', function (ariaNgLocalizationService, aria2SettingService) {
+    angular.module('weDownload').directive('ngSettingDialog', ['weDownloadLocalizationService', 'aria2SettingService', function (weDownloadLocalizationService, aria2SettingService) {
         return {
             restrict: 'E',
             templateUrl: 'views/setting-dialog.html',
@@ -30,7 +30,7 @@
                     var keys = aria2SettingService.getAria2QuickSettingsAvailableOptions(type);
 
                     if (!keys) {
-                        ariaNgLocalizationService.showError('Type is illegal!');
+                        weDownloadLocalizationService.showError('Type is illegal!');
                         return;
                     }
 

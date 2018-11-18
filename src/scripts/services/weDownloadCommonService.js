@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('ariaNgCommonService', ['$location', '$timeout', 'base64', 'moment', 'SweetAlert', 'ariaNgConstants', function ($location, $timeout, base64, moment, SweetAlert, ariaNgConstants) {
+    angular.module('weDownload').factory('weDownloadCommonService', ['$location', '$timeout', 'base64', 'moment', 'SweetAlert', 'weDownloadConstants', function ($location, $timeout, base64, moment, SweetAlert, weDownloadConstants) {
         return {
             base64Encode: function (value) {
                 return base64.encode(value);
@@ -13,7 +13,7 @@
                 return base64.urldecode(value);
             },
             generateUniqueId: function () {
-                var sourceId = ariaNgConstants.appPrefix + '_' + Math.round(new Date().getTime() / 1000) + '_' + Math.random();
+                var sourceId = weDownloadConstants.appPrefix + '_' + Math.round(new Date().getTime() / 1000) + '_' + Math.random();
                 var hashedId = this.base64Encode(sourceId);
 
                 return hashedId;
@@ -78,25 +78,12 @@
 
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
-                    //TODO convert different protocols to
+
                     if (line.match(/^(http|https|ftp|sftp):\/\/.+$/)) {
                         result.push(line);
                     } else if (line.match(/^magnet:\?.+$/)) {
                         result.push(line);
-                    } else if (line.match(/^(ed2k):\/\/.+$/)){
-
-                        result.push(line)
-                    }else if (line.match(/^(thunder):\/\/.+$/)){
-                        line = base64.decode(line.replace(/thunder:\/\//,'')).replace(/^AA/,'').replace(/ZZ$/,'')
-                        result.push(line)
-                    }else if (line.match(/^(flashget):\/\/.+$/)){
-                        line = base64.decode(line.replace(/flashget:\/\//,'')).replace(/\[FLASHGET\]/,'')
-                        result.push(line)
-                    }else if (line.match(/^(qqdl):\/\/.+$/)){
-                        line = base64.decode(line.replace(/qqdl:\/\//,''))
-                        result.push(line)
                     }
-
                 }
 
                 return result;

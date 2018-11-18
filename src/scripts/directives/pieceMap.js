@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngPieceMap', ['aria2TaskService', function (aria2TaskService) {
+    angular.module('weDownload').directive('ngPieceMap', ['aria2TaskService', function (aria2TaskService) {
         return {
             restrict: 'E',
             template: '<div class="piece-map"></div>',

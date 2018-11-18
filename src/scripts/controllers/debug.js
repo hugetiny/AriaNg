@@ -1,16 +1,16 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').controller('AriaNgDebugController', ['$rootScope', '$scope', '$location', '$timeout', 'ariaNgConstants', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgSettingService', function ($rootScope, $scope, $location, $timeout, ariaNgConstants, ariaNgLocalizationService, ariaNgLogService, ariaNgSettingService) {
-        $scope.logMaxCount = ariaNgConstants.cachedDebugLogsLimit;
+    angular.module('weDownload').controller('WeDownloadDebugController', ['$rootScope', '$scope', '$location', '$timeout', 'WeDownloadConstants', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadSettingService', function ($rootScope, $scope, $location, $timeout, WeDownloadConstants, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadSettingService) {
+        $scope.logMaxCount = WeDownloadConstants.cachedDebugLogsLimit;
         $scope.currentLog = null;
 
         $scope.enableDebugMode = function () {
-            return ariaNgSettingService.isEnableDebugMode();
+            return WeDownloadSettingService.isEnableDebugMode();
         };
 
         $scope.reloadLogs = function () {
-            $scope.logs = ariaNgLogService.getDebugLogs().slice();
+            $scope.logs = WeDownloadLogService.getDebugLogs().slice();
         };
 
         $scope.showLogDetail = function (log) {
@@ -23,10 +23,10 @@
         });
 
         $rootScope.loadPromise = $timeout(function () {
-            if (!ariaNgSettingService.isEnableDebugMode()) {
-                ariaNgLocalizationService.showError('Access Denied!', function () {
-                    if (!ariaNgSettingService.isEnableDebugMode()) {
-                        $location.path('/settings/ariang');
+            if (!WeDownloadSettingService.isEnableDebugMode()) {
+                WeDownloadLocalizationService.showError('Access Denied!', function () {
+                    if (!WeDownloadSettingService.isEnableDebugMode()) {
+                        $location.path('/settings/WeDownload');
                     }
                 });
                 return;

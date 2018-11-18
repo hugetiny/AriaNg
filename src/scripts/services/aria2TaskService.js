@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('aria2TaskService', ['$q', 'bittorrentPeeridService', 'ariaNgConstants', 'aria2Errors', 'aria2RpcService', 'ariaNgCommonService', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgSettingService', function ($q, bittorrentPeeridService, ariaNgConstants, aria2Errors, aria2RpcService, ariaNgCommonService, ariaNgLocalizationService, ariaNgLogService, ariaNgSettingService) {
+    angular.module('weDownload').factory('aria2TaskService', ['$q', 'bittorrentPeeridService', 'WeDownloadConstants', 'aria2Errors', 'aria2RpcService', 'WeDownloadCommonService', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadSettingService', function ($q, bittorrentPeeridService, WeDownloadConstants, aria2Errors, aria2RpcService, WeDownloadCommonService, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadSettingService) {
         var getFileName = function (file) {
             if (!file) {
-                ariaNgLogService.warn('[aria2TaskService.getFileName] file is null');
+                WeDownloadLogService.warn('[aria2TaskService.getFileName] file is null');
                 return '';
             }
 
@@ -44,7 +44,7 @@
             }
 
             if (!taskName) {
-                taskName = ariaNgLocalizationService.getLocalizedText('Unknown');
+                taskName = WeDownloadLocalizationService.getLocalizedText('Unknown');
                 success = false;
             }
 
@@ -59,21 +59,21 @@
             var relativePath = file.path;
 
             if (downloadPath) {
-                downloadPath = downloadPath.replace(/\\/g, ariaNgConstants.defaultPathSeparator);
+                downloadPath = downloadPath.replace(/\\/g, WeDownloadConstants.defaultPathSeparator);
             }
 
             if (relativePath) {
-                relativePath = relativePath.replace(/\\/g, ariaNgConstants.defaultPathSeparator);
+                relativePath = relativePath.replace(/\\/g, WeDownloadConstants.defaultPathSeparator);
             }
 
             var trimStartPathSeparator = function () {
-                if (relativePath.length > 1 && relativePath.charAt(0) === ariaNgConstants.defaultPathSeparator) {
+                if (relativePath.length > 1 && relativePath.charAt(0) === WeDownloadConstants.defaultPathSeparator) {
                     relativePath = relativePath.substr(1);
                 }
             };
 
             var trimEndPathSeparator = function () {
-                if (relativePath.length > 1 && relativePath.charAt(relativePath.length - 1) === ariaNgConstants.defaultPathSeparator) {
+                if (relativePath.length > 1 && relativePath.charAt(relativePath.length - 1) === WeDownloadConstants.defaultPathSeparator) {
                     relativePath = relativePath.substr(0, relativePath.length - 1);
                 }
             };
@@ -115,7 +115,7 @@
 
             if (path.length) {
                 var parentPath = '';
-                var lastSeparatorIndex = path.lastIndexOf(ariaNgConstants.defaultPathSeparator);
+                var lastSeparatorIndex = path.lastIndexOf(WeDownloadConstants.defaultPathSeparator);
 
                 if (lastSeparatorIndex > 0) {
                     parentPath = path.substring(0, lastSeparatorIndex);
@@ -267,7 +267,7 @@
 
         var processDownloadTask = function (task, addVirtualFileNode) {
             if (!task) {
-                ariaNgLogService.warn('[aria2TaskService.processDownloadTask] task is null');
+                WeDownloadLogService.warn('[aria2TaskService.processDownloadTask] task is null');
                 return task;
             }
 
@@ -287,7 +287,7 @@
             task.downloadSpeed = parseInt(task.downloadSpeed);
 
             task.numPieces = parseInt(task.numPieces);
-            task.completedPieces = ariaNgCommonService.countArray(pieceStatus, true);
+            task.completedPieces = WeDownloadCommonService.countArray(pieceStatus, true);
             task.pieceLength = parseInt(task.pieceLength);
 
             task.idle = task.downloadSpeed === 0;
@@ -353,19 +353,19 @@
                 }
             }
 
-            ariaNgLogService.debug('[aria2TaskService.processDownloadTask] process success', task);
+            WeDownloadLogService.debug('[aria2TaskService.processDownloadTask] process success', task);
 
             return task;
         };
 
         var processBtPeers = function (peers, task, includeLocalPeer) {
             if (!peers) {
-                ariaNgLogService.warn('[aria2TaskService.processBtPeers] peers is null');
+                WeDownloadLogService.warn('[aria2TaskService.processBtPeers] peers is null');
                 return peers;
             }
 
             var localTaskCompletedPieces = getPieceStatus(task.bitfield, task.numPieces);
-            var localTaskCompletedPieceCount = ariaNgCommonService.countArray(localTaskCompletedPieces, true);
+            var localTaskCompletedPieceCount = WeDownloadCommonService.countArray(localTaskCompletedPieces, true);
             var localTaskCompletedPercent = task.completePercent;
 
             for (var i = 0; i < peers.length; i++) {
@@ -373,7 +373,7 @@
                 var upstreamToSpeed = peer.uploadSpeed;
                 var downstreamFromSpeed = peer.downloadSpeed;
                 var completedPieces = getPieceStatus(peer.bitfield, task.numPieces);
-                var completedPieceCount = ariaNgCommonService.countArray(completedPieces, true);
+                var completedPieceCount = WeDownloadCommonService.countArray(completedPieces, true);
 
                 peer.name = peer.ip + ':' + peer.port;
                 peer.completePercent = completedPieceCount / task.numPieces * 100;
@@ -386,7 +386,7 @@
                 }
 
                 if (peer.peerId) {
-                    var peerId = ariaNgCommonService.decodePercentEncodedString(peer.peerId);
+                    var peerId = WeDownloadCommonService.decodePercentEncodedString(peer.peerId);
                     var clientInfo = (peerId ? bittorrentPeeridService.parseClient(peerId) : null);
 
                     if (clientInfo && clientInfo.client !== 'unknown') {
@@ -459,7 +459,7 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.getTaskList] callback is null');
+                            weDownloadLogService.warn('[aria2TaskService.getTaskList] callback is null');
                             return;
                         }
 
@@ -473,7 +473,7 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.getTaskStatus] callback is null');
+                            weDownloadLogService.warn('[aria2TaskService.getTaskStatus] callback is null');
                             return;
                         }
 
@@ -522,7 +522,7 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.getBtTaskPeers] callback is null');
+                            weDownloadLogService.warn('[aria2TaskService.getBtTaskPeers] callback is null');
                             return;
                         }
 
@@ -548,7 +548,7 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.getTaskStatusAndBtPeers] callback is null');
+                            weDownloadLogService.warn('[aria2TaskService.getTaskStatusAndBtPeers] callback is null');
                             return;
                         }
 
@@ -629,12 +629,12 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.retryTask] callback is null');
+                            weDownloadLogService.warn('[aria2TaskService.retryTask] callback is null');
                             return;
                         }
 
                         if (!response.success) {
-                            ariaNgLogService.warn('[aria2TaskService.retryTask] response is not success', response);
+                            weDownloadLogService.warn('[aria2TaskService.retryTask] response is not success', response);
                             deferred.reject(response);
                             callback(response);
                             return;
@@ -650,23 +650,23 @@
 
                         if (!task || !options || !task.files || task.files.length !== 1 || task.bittorrent) {
                             if (!task) {
-                                ariaNgLogService.warn('[aria2TaskService.retryTask] task is null');
+                                weDownloadLogService.warn('[aria2TaskService.retryTask] task is null');
                             }
 
                             if (!options) {
-                                ariaNgLogService.warn('[aria2TaskService.retryTask] options is null');
+                                weDownloadLogService.warn('[aria2TaskService.retryTask] options is null');
                             }
 
                             if (!task.files) {
-                                ariaNgLogService.warn('[aria2TaskService.retryTask] task file is null');
+                                weDownloadLogService.warn('[aria2TaskService.retryTask] task file is null');
                             }
 
                             if (task.files.length !== 1) {
-                                ariaNgLogService.warn('[aria2TaskService.retryTask] task file length is not equal 1');
+                                weDownloadLogService.warn('[aria2TaskService.retryTask] task file length is not equal 1');
                             }
 
                             if (task.bittorrent) {
-                                ariaNgLogService.warn('[aria2TaskService.retryTask] task is bittorrent');
+                                weDownloadLogService.warn('[aria2TaskService.retryTask] task is bittorrent');
                             }
 
                             deferred.reject(gid);
@@ -693,19 +693,19 @@
                             silent: !!silent,
                             callback: function (response) {
                                 if (!response.success) {
-                                    ariaNgLogService.warn('[aria2TaskService.retryTask] addUri response is not success', response);
+                                    weDownloadLogService.warn('[aria2TaskService.retryTask] addUri response is not success', response);
                                     deferred.reject(response);
                                     callback(response);
                                     return;
                                 }
 
-                                if (ariaNgSettingService.getRemoveOldTaskAfterRetrying()) {
+                                if (weDownloadSettingService.getRemoveOldTaskAfterRetrying()) {
                                     aria2RpcService.removeDownloadResult({
                                         gid: gid,
                                         silent: true,
                                         callback: function (response) {
                                             if (!response.success) {
-                                                ariaNgLogService.warn('[aria2TaskService.retryTask] removeDownloadResult response is not success', response);
+                                                weDownloadLogService.warn('[aria2TaskService.retryTask] removeDownloadResult response is not success', response);
                                             }
                                         }
                                     });
@@ -722,7 +722,7 @@
             },
             retryTasks: function (tasks, callback, silent) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.retryTasks] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.retryTasks] callback is null');
                     return;
                 }
 
@@ -736,7 +736,7 @@
 
                 var doRetryFunc = function (task, index) {
                     return retryTaskFunc(task.gid, function (response) {
-                        ariaNgLogService.debug('[aria2TaskService.retryTasks] task#' + index + ', gid=' + task.gid + ', result=' + response.success, task);
+                        weDownloadLogService.debug('[aria2TaskService.retryTasks] task#' + index + ', gid=' + task.gid + ', result=' + response.success, task);
 
                         if (response.success) {
                             successCount++;
@@ -800,7 +800,7 @@
                         gids: runningTaskGids,
                         silent: !!silent,
                         callback: function (response) {
-                            ariaNgCommonService.pushArrayTo(results, response.results);
+                            weDownloadCommonService.pushArrayTo(results, response.results);
                             hasSuccess = hasSuccess | response.hasSuccess;
                             hasError = hasError | response.hasError;
                         }
@@ -812,7 +812,7 @@
                         gids: stoppedTaskGids,
                         silent: !!silent,
                         callback: function (response) {
-                            ariaNgCommonService.pushArrayTo(results, response.results);
+                            weDownloadCommonService.pushArrayTo(results, response.results);
                             hasSuccess = hasSuccess | response.hasSuccess;
                             hasError = hasError | response.hasError;
                         }
@@ -846,7 +846,7 @@
             },
             onFirstSuccess: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onFirstSuccess] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onFirstSuccess] callback is null');
                     return;
                 }
 
@@ -856,7 +856,7 @@
             },
             onOperationSuccess: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onOperationSuccess] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onOperationSuccess] callback is null');
                     return;
                 }
 
@@ -866,7 +866,7 @@
             },
             onOperationError: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onOperationError] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onOperationError] callback is null');
                     return;
                 }
 
@@ -877,7 +877,7 @@
             },
             onTaskCompleted: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onTaskCompleted] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onTaskCompleted] callback is null');
                     return;
                 }
 
@@ -887,7 +887,7 @@
             },
             onBtTaskCompleted: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onBtTaskCompleted] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onBtTaskCompleted] callback is null');
                     return;
                 }
 
@@ -897,7 +897,7 @@
             },
             onTaskErrorOccur: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onTaskErrorOccur] callback is null');
+                    weDownloadLogService.warn('[aria2TaskService.onTaskErrorOccur] callback is null');
                     return;
                 }
 
@@ -907,7 +907,7 @@
             },
             processDownloadTasks: function (tasks, addVirtualFileNode) {
                 if (!angular.isArray(tasks)) {
-                    ariaNgLogService.warn('[aria2TaskService.processDownloadTasks] tasks is not array', tasks);
+                    weDownloadLogService.warn('[aria2TaskService.processDownloadTasks] tasks is not array', tasks);
                     return;
                 }
 
@@ -923,7 +923,7 @@
             },
             estimateHealthPercentFromPeers: function (task, peers) {
                 if (!task || task.numPieces < 1 || peers.length < 1) {
-                    ariaNgLogService.warn('[aria2TaskService.estimateHealthPercentFromPeers] tasks is null or numPieces < 1 or peers < 1', task);
+                    weDownloadLogService.warn('[aria2TaskService.estimateHealthPercentFromPeers] tasks is null or numPieces < 1 or peers < 1', task);
                     return task.completePercent;
                 }
 

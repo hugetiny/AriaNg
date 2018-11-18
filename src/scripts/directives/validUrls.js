@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngValidUrls', ['ariaNgCommonService', function (ariaNgCommonService) {
+    angular.module('weDownload').directive('ngValidUrls', ['WeDownloadCommonService', function (WeDownloadCommonService) {
         var DIRECTIVE_ID = 'invalidUrls';
 
         return {
@@ -13,7 +13,7 @@
                         return;
                     }
 
-                    var urls = ariaNgCommonService.parseUrlsFromOriginInput(value);
+                    var urls = WeDownloadCommonService.parseUrlsFromOriginInput(value);
                     var valid = urls && urls.length > 0;
 
                     ngModel.$setValidity(DIRECTIVE_ID, valid);

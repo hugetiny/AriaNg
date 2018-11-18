@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('aria2RpcService', ['$q', 'aria2RpcConstants', 'aria2RpcErrors', 'aria2AllOptions', 'ariaNgCommonService', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgSettingService', 'aria2HttpRpcService', 'aria2WebSocketRpcService', function ($q, aria2RpcConstants, aria2RpcErrors, aria2AllOptions, ariaNgCommonService, ariaNgLocalizationService, ariaNgLogService, ariaNgSettingService, aria2HttpRpcService, aria2WebSocketRpcService) {
-        var rpcImplementService = ariaNgSettingService.isCurrentRpcUseWebSocket() ? aria2WebSocketRpcService : aria2HttpRpcService;
+    angular.module('weDownload').factory('aria2RpcService', ['$q', 'aria2RpcConstants', 'aria2RpcErrors', 'aria2AllOptions', 'weDownloadCommonService', 'weDownloadLocalizationService', 'weDownloadLogService', 'weDownloadSettingService', 'aria2HttpRpcService', 'aria2WebSocketRpcService', function ($q, aria2RpcConstants, aria2RpcErrors, aria2AllOptions, weDownloadCommonService, weDownloadLocalizationService, weDownloadLogService, weDownloadSettingService, aria2HttpRpcService, aria2WebSocketRpcService) {
+        var rpcImplementService = weDownloadSettingService.isCurrentRpcUseWebSocket() ? aria2WebSocketRpcService : aria2HttpRpcService;
         var isConnected = false;
-        var secret = ariaNgSettingService.getCurrentRpcSecret();
+        var secret = weDownloadSettingService.getCurrentRpcSecret();
 
         var onFirstSuccessCallbacks = [];
         var onOperationSuccessCallbacks = [];
@@ -33,7 +33,7 @@
                 return requestContext;
             }
 
-            var uniqueId = ariaNgCommonService.generateUniqueId();
+            var uniqueId = weDownloadCommonService.generateUniqueId();
 
             var requestBody = {
                 jsonrpc: aria2RpcConstants.rpcServiceVersion,
@@ -112,13 +112,13 @@
                 return false;
             }
 
-            ariaNgLogService.error('[aria2RpcService.processError] ' + error.message, error);
+            weDownloadLogService.error('[aria2RpcService.processError] ' + error.message, error);
 
             if (aria2RpcErrors[error.message] && aria2RpcErrors[error.message].tipTextKey) {
-                ariaNgLocalizationService.showError(aria2RpcErrors[error.message].tipTextKey);
+                weDownloadLocalizationService.showError(aria2RpcErrors[error.message].tipTextKey);
                 return true;
             } else {
-                ariaNgLocalizationService.showError(error.message);
+                weDownloadLocalizationService.showError(error.message);
                 return true;
             }
         };
@@ -154,7 +154,7 @@
                     if (!isConnected) {
                         isConnected = true;
                         var firstSuccessContext = {
-                            rpcName: ariaNgSettingService.getCurrentRpcDisplayName()
+                            rpcName: weDownloadSettingService.getCurrentRpcDisplayName()
                         };
                         fireCustomEvent(onFirstSuccessCallbacks, firstSuccessContext);
                     }

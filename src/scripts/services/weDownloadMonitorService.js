@@ -1,16 +1,16 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('ariaNgMonitorService', ['$filter', 'ariaNgConstants', 'ariaNgCommonService', 'ariaNgLocalizationService', function ($filter, ariaNgConstants, ariaNgCommonService, ariaNgLocalizationService) {
+    angular.module('weDownload').factory('weDownloadMonitorService', ['$filter', 'weDownloadConstants', 'weDownloadCommonService', 'weDownloadLocalizationService', function ($filter, weDownloadConstants, weDownloadCommonService, weDownloadLocalizationService) {
         var currentGlobalStat = {};
         var storagesInMemory = {};
         var globalStorageKey = 'global';
 
         var getStorageCapacity = function (key) {
             if (key === globalStorageKey) {
-                return ariaNgConstants.globalStatStorageCapacity;
+                return weDownloadConstants.globalStatStorageCapacity;
             } else {
-                return ariaNgConstants.taskStatStorageCapacity;
+                return weDownloadConstants.taskStatStorageCapacity;
             }
         };
 
@@ -29,10 +29,10 @@
                     show: true,
                     formatter: function (params) {
                         if (params[0].name === '') {
-                            return '<div>' + ariaNgLocalizationService.getLocalizedText('No Data') + '</div>';
+                            return '<div>' + weDownloadLocalizationService.getLocalizedText('No Data') + '</div>';
                         }
 
-                        var time = ariaNgCommonService.getLongTimeFromUnixTime(params[0].name);
+                        var time = weDownloadCommonService.getLongTimeFromUnixTime(params[0].name);
                         var uploadSpeed = $filter('readableVolume')(params[0].value) + '/s';
                         var downloadSpeed = $filter('readableVolume')(params[1].value) + '/s';
 
@@ -132,7 +132,7 @@
                     initStorage(key);
                 }
 
-                stat.time = ariaNgCommonService.getCurrentUnixTime();
+                stat.time = weDownloadCommonService.getCurrentUnixTime();
                 pushToStorage(key, stat);
             },
             getStatsData: function (key) {

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').filter('readableVolume', ['$filter', function ($filter) {
+    angular.module('weDownload').filter('readableVolume', ['$filter', function ($filter) {
         var units = [ 'B', 'KB', 'MB', 'GB' ];
         var defaultFractionSize = 2;
 

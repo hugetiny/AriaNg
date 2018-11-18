@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg')
+    angular.module('weDownload')
         .directive('ngChart', ['$window', 'chartTheme', function ($window, chartTheme) {
         return {
             restrict: 'E',

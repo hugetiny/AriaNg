@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').controller('NewTaskController', ['$rootScope', '$scope', '$location', '$timeout', 'ariaNgCommonService', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgFileService', 'ariaNgSettingService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $location, $timeout, ariaNgCommonService, ariaNgLocalizationService, ariaNgLogService, ariaNgFileService, ariaNgSettingService, aria2TaskService, aria2SettingService) {
+    angular.module('weDownload').controller('NewTaskController', ['$rootScope', '$scope', '$location', '$timeout', 'WeDownloadCommonService', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadFileService', 'WeDownloadSettingService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $location, $timeout, WeDownloadCommonService, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadFileService, WeDownloadSettingService, aria2TaskService, aria2SettingService) {
         var tabOrders = ['links', 'options'];
         var parameters = $location.search();
 
@@ -14,7 +14,7 @@
         };
 
         var downloadByLinks = function (pauseOnAdded, responseCallback) {
-            var urls = ariaNgCommonService.parseUrlsFromOriginInput($scope.context.urls);
+            var urls = WeDownloadCommonService.parseUrlsFromOriginInput($scope.context.urls);
             var options = angular.copy($scope.context.options);
             var tasks = [];
 
@@ -79,9 +79,9 @@
 
         if (parameters.url) {
             try {
-                $scope.context.urls = ariaNgCommonService.base64UrlDecode(parameters.url);
+                $scope.context.urls = WeDownloadCommonService.base64UrlDecode(parameters.url);
             } catch (ex) {
-                ariaNgLogService.error('[NewTaskController] base64 decode error, url=' + parameters.url, ex);
+                WeDownloadLogService.error('[NewTaskController] base64 decode error, url=' + parameters.url, ex);
             }
         }
 
@@ -128,7 +128,7 @@
         };
 
         $scope.openTorrent = function () {
-            ariaNgFileService.openFileContent({
+            WeDownloadFileService.openFileContent({
                 fileFilter: '.torrent',
                 fileType: 'binary'
             }, function (result) {
@@ -136,12 +136,12 @@
                 $scope.context.taskType = 'torrent';
                 $scope.changeTab('options');
             }, function (error) {
-                ariaNgLocalizationService.showError(error);
+                WeDownloadLocalizationService.showError(error);
             }, angular.element('#file-holder'));
         };
 
         $scope.openMetalink = function () {
-            ariaNgFileService.openFileContent({
+            WeDownloadFileService.openFileContent({
                 fileFilter: '.meta4,.metalink',
                 fileType: 'binary'
             }, function (result) {
@@ -149,7 +149,7 @@
                 $scope.context.taskType = 'metalink';
                 $scope.changeTab('options');
             }, function (error) {
-                ariaNgLocalizationService.showError(error);
+                WeDownloadLocalizationService.showError(error);
             }, angular.element('#file-holder'));
         };
 
@@ -167,7 +167,7 @@
                     firstTask = response;
                 }
 
-                if (ariaNgSettingService.getAfterCreatingNewTask() === 'task-detail' && firstTask && firstTask.data) {
+                if (WeDownloadSettingService.getAfterCreatingNewTask() === 'task-detail' && firstTask && firstTask.data) {
                     $location.path('/task/detail/' + firstTask.data);
                 } else {
                     if (pauseOnAdded) {
@@ -204,7 +204,7 @@
         };
 
         $scope.getValidUrlsCount = function () {
-            var urls = ariaNgCommonService.parseUrlsFromOriginInput($scope.context.urls);
+            var urls = WeDownloadCommonService.parseUrlsFromOriginInput($scope.context.urls);
             return urls ? urls.length : 0;
         };
 

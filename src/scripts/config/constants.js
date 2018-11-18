@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').constant('ariaNgConstants', {
-        title: 'AriaNg',
-        appPrefix: 'AriaNg',
+    angular.module('weDownload').constant('weDownloadConstants', {
+        title: 'WeDownload',
+        appPrefix: 'WeDownload',
         optionStorageKey: 'Options',
         languageStorageKeyPrefix: 'Language',
         settingHistoryKeyPrefix: 'History',
@@ -20,7 +20,7 @@
         notificationInPageTimeout: 2000,
         historyMaxStoreCount: 10,
         cachedDebugLogsLimit: 100
-    }).constant('ariaNgDefaultOptions', {
+    }).constant('weDownloadDefaultOptions', {
         language: 'en',
         title: '${downspeed}, ${upspeed} - ${title}',
         titleRefreshInterval: 5000,

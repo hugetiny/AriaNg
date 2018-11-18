@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').constant('aria2RpcConstants', {
+    angular.module('weDownload').constant('aria2RpcConstants', {
         rpcServiceVersion: '2.0',
         rpcServiceName: 'aria2',
         rpcSystemServiceName: 'system',

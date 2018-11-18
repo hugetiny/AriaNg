@@ -1,5 +1,5 @@
 import { Component } from 'react'
-class SettingsAriang extends Component {
+class SettingsWeDownload extends Component {
     render() {
         return <div>
 <section className="content no-padding">
@@ -53,7 +53,7 @@ class SettingsAriang extends Component {
                             <i className="icon-primary fa fa-question-circle" data-toggle="popover"
                                data-trigger="hover" data-placement="auto right" data-container="body" data-html="true"
                                data-content="{{('Supported Placeholder' | translate) + ':<br/>' +
-                               ('AriaNg Title' | translate) + ': ${title}<br/>' +
+                               ('WeDownload Title' | translate) + ': ${title}<br/>' +
                                ('Downloading Count' | translate) + ': ${downloading}<br/>' +
                                 ('Waiting Count' | translate) + ': ${waiting}<br/>' +
                                 ('Stopped Count' | translate) + ': ${stopped}<br/>' +
@@ -157,7 +157,7 @@ class SettingsAriang extends Component {
                     </div>
                     <div className="row">
                         <div className="setting-key setting-key-without-desc col-sm-4">
-                            <span translate>Import / Export AriaNg Settings</span>
+                            <span translate>Import / Export WeDownload Settings</span>
                         </div>
                         <div className="setting-value col-sm-8">
                             <button className="btn btn-sm btn-default" onClick={showImportSettingsModal()}>
@@ -216,7 +216,7 @@ class SettingsAriang extends Component {
                             <span translate>Aria2 RPC Protocol</span>
                             <span className="asterisk">*</span>
                             <i className="icon-primary fa fa-question-circle" ng-tooltip-container="body" ng-tooltip-placement="top"
-                              data-toggle="tooltip" title="{{'Http and WebSocket would be disabled when accessing AriaNg via Https.' | translate}}"></i>
+                              data-toggle="tooltip" title="{{'Http and WebSocket would be disabled when accessing WeDownload via Https.' | translate}}"></i>
                         </div>
                         <div className="setting-value col-sm-8">
                             <select className="form-control" style="width: 100%;" ng-model="setting.protocol" ng-change="updateRpcSetting(setting, 'protocol')">
@@ -278,7 +278,7 @@ class SettingsAriang extends Component {
                     <h4 className="modal-title">
                         <span translate>Import Settings</span>
                         <small>
-                            <a className="pointer-cursor"data-toggle="tooltip" title="{{'Open' | translate}}" onClick={openAriaNgConfigFile()}>
+                            <a className="pointer-cursor"data-toggle="tooltip" title="{{'Open' | translate}}" onClick={openWeDownloadConfigFile()}>
                                 <i className="icon-primary fa fa-folder-open-o"></i>
                             </a>
                         </small>
@@ -288,7 +288,7 @@ class SettingsAriang extends Component {
                     <div className="settings-table striped">
                         <input id="import-file-holder" type="file" style="display: none"/>
                         <textarea className="form-control" ng-model="context.importSettings" rows="20"
-                                  placeholder="'AriaNg settings data' | translate"></textarea>
+                                  placeholder="'WeDownload settings data' | translate"></textarea>
                     </div>
                 </div>
                 <div className="modal-footer">
@@ -308,7 +308,7 @@ class SettingsAriang extends Component {
                         <span translate>Export Settings</span>
                         <small>
                             <a className="pointer-cursor"data-toggle="tooltip" title="{{'Save' | translate}}" ng-if="context.isSupportBlob"
-                               ng-blob-download="context.exportSettings" ng-file-name="AriaNgConfig.json" ng-content-type="application/json">
+                               ng-blob-download="context.exportSettings" ng-file-name="WeDownloadConfig.json" ng-content-type="application/json">
                                 <i className="icon-primary fa fa-save"></i>
                             </a>
                             <a className="pointer-cursor"data-toggle="tooltip" title="{{'Copy' | translate}}" onClick={copyExportSettings()}>

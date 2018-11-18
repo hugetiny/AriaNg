@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').run(['$rootScope', '$location', '$document', 'ariaNgCommonService', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgSettingService', 'aria2TaskService', function ($rootScope, $location, $document, ariaNgCommonService, ariaNgLocalizationService, ariaNgLogService, ariaNgSettingService, aria2TaskService) {
+    angular.module('weDownload').run(['$rootScope', '$location', '$document', 'WeDownloadCommonService', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadSettingService', 'aria2TaskService', function ($rootScope, $location, $document, WeDownloadCommonService, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadSettingService, aria2TaskService) {
         var isUrlMatchUrl2 = function (url, url2) {
             if (url === url2) {
                 return true;
@@ -23,27 +23,27 @@
         };
 
         var initCheck = function () {
-            var browserFeatures = ariaNgSettingService.getBrowserFeatures();
+            var browserFeatures = WeDownloadSettingService.getBrowserFeatures();
 
             if (!browserFeatures.localStroage) {
-                ariaNgLogService.warn('[root.initCheck] LocalStorage is not supported!');
+                WeDownloadLogService.warn('[root.initCheck] LocalStorage is not supported!');
             }
 
             if (!browserFeatures.cookies) {
-                ariaNgLogService.warn('[root.initCheck] Cookies is not supported!');
+                WeDownloadLogService.warn('[root.initCheck] Cookies is not supported!');
             }
 
-            if (!ariaNgSettingService.isBrowserSupportStorage()) {
+            if (!WeDownloadSettingService.isBrowserSupportStorage()) {
                 angular.element('body').prepend('<div class="disable-overlay"></div>');
                 angular.element('.main-sidebar').addClass('blur');
                 angular.element('.navbar').addClass('blur');
                 angular.element('.content-body').addClass('blur');
-                ariaNgLocalizationService.notifyInPage('', 'You cannot use AriaNg because this browser does not support data storage.', {
+                WeDownloadLocalizationService.notifyInPage('', 'You cannot use WeDownload because this browser does not support data storage.', {
                     type: 'error',
                     delay: false
                 });
 
-                throw new Error('You cannot use AriaNg because this browser does not support data storage.');
+                throw new Error('You cannot use WeDownload because this browser does not support data storage.');
             }
         };
 
@@ -185,17 +185,17 @@
             }
         };
 
-        ariaNgSettingService.onFirstAccess(function () {
-            ariaNgLocalizationService.notifyInPage('', 'Tap to configure and get started with AriaNg.', {
+        WeDownloadSettingService.onFirstAccess(function () {
+            WeDownloadLocalizationService.notifyInPage('', 'Tap to configure and get started with WeDownload.', {
                 delay: false,
                 onClose: function () {
-                    $location.path('/settings/ariang');
+                    $location.path('/settings/WeDownload');
                 }
             });
         });
 
         aria2TaskService.onFirstSuccess(function (event) {
-            ariaNgLocalizationService.notifyInPage('', '{{name}} is connected', {
+            WeDownloadLocalizationService.notifyInPage('', '{{name}} is connected', {
                 type: 'success',
                 contentParams: {
                     name: event.rpcName
@@ -212,19 +212,19 @@
         });
 
         aria2TaskService.onTaskCompleted(function (event) {
-            ariaNgLocalizationService.notifyTaskComplete(event.task);
+            WeDownloadLocalizationService.notifyTaskComplete(event.task);
         });
 
         aria2TaskService.onBtTaskCompleted(function (event) {
-            ariaNgLocalizationService.notifyBtTaskComplete(event.task);
+            WeDownloadLocalizationService.notifyBtTaskComplete(event.task);
         });
 
         aria2TaskService.onTaskErrorOccur(function (event) {
-            ariaNgLocalizationService.notifyTaskError(event.task);
+            WeDownloadLocalizationService.notifyTaskError(event.task);
         });
 
         $rootScope.$on('$locationChangeStart', function (event) {
-            ariaNgCommonService.closeAllDialogs();
+            WeDownloadCommonService.closeAllDialogs();
 
             $rootScope.loadPromise = null;
 

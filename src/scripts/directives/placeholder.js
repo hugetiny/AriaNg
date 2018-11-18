@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').directive('ngPlaceholder', function () {
+    angular.module('weDownload').directive('ngPlaceholder', function () {
         return {
             restrict: 'A',
             scope: {

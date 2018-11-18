@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').filter('reverse', function () {
+    angular.module('weDownload').filter('reverse', function () {
         return function(array) {
             if (!array) {
                 return array;

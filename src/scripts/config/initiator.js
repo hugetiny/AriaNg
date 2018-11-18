@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').run(['moment', 'ariaNgLocalizationService', 'ariaNgSettingService', function (moment, ariaNgLocalizationService, ariaNgSettingService) {
-        var language = ariaNgSettingService.getLanguage();
+    angular.module('weDownload').run(['moment', 'WeDownloadLocalizationService', 'WeDownloadSettingService', function (moment, WeDownloadLocalizationService, weDownloadSettingService) {
+        var language = weDownloadSettingService.getLanguage();
 
         moment.updateLocale('zh-cn', {
             week: null
         });
 
-        ariaNgLocalizationService.applyLanguage(language);
+        weDownloadLocalizationService.applyLanguage(language);
     }]);
 }());

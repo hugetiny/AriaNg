@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('ariaNg').constant('aria2AllOptions', {
+    angular.module('weDownload').constant('aria2AllOptions', {
         // Aria2 Option Defination EXAMPLE:
         // 'option key': {
         //     [since: '',] //This option is supported by this or higher aria2 version

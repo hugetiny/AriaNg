@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').filter('longDate', ['ariaNgCommonService', 'ariaNgLocalizationService', function (ariaNgCommonService, ariaNgLocalizationService) {
+    angular.module('weDownload').filter('longDate', ['WeDownloadCommonService', 'WeDownloadLocalizationService', function (WeDownloadCommonService, WeDownloadLocalizationService) {
         return function (time) {
-            var format = ariaNgLocalizationService.getLongDateFormat();
-            return ariaNgCommonService.formatDateTime(time, format);
+            var format = WeDownloadLocalizationService.getLongDateFormat();
+            return WeDownloadCommonService.formatDateTime(time, format);
         };
     }]);
 }());
