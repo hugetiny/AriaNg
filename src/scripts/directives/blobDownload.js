@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').directive('ngBlobDownload', ['WeDownloadFileService', function (WeDownloadFileService) {
+    angular.module('weDownload').directive('ngBlobDownload', ['weDownloadFileService', function (weDownloadFileService) {
         return {
             restrict: 'A',
             scope: {
@@ -12,7 +12,7 @@
             link: function (scope, element) {
                 scope.$watch('ngBlobDownload', function (value) {
                     if (value) {
-                        WeDownloadFileService.saveFileContent(value, element, {
+                        weDownloadFileService.saveFileContent(value, element, {
                             fileName: scope.ngFileName,
                             contentType: scope.ngContentType
                         });

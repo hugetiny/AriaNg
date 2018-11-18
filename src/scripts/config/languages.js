@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').constant('WeDownloadLanguages', {
+    angular.module('weDownload').constant('weDownloadLanguages', {
         'en': {
             name: 'English',
             displayName: 'English'

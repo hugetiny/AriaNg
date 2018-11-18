@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadFileService', ['$window', function ($window) {
+    angular.module('weDownload').factory('weDownloadFileService', ['$window', function ($window) {
         var isSupportFileReader = !!$window.FileReader;
         var isSupportBlob = !!$window.Blob;
 
@@ -75,7 +75,7 @@
 
                 element.val('');
 
-                if (element.attr('data-WeDownload-file-initialized') !== 'true') {
+                if (element.attr('data-weDownload-file-initialized') !== 'true') {
                     element.change(function () {
                         if (!this.files || this.files.length < 1) {
                             return;
@@ -129,7 +129,7 @@
                                 reader.readAsDataURL(file);
                                 break;
                         }
-                    }).attr('data-WeDownload-file-initialized', 'true');
+                    }).attr('data-weDownload-file-initialized', 'true');
                 }
 
                 element.trigger('click');

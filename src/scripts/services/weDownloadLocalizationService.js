@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadLocalizationService', ['$translate', 'amMoment', 'WeDownloadCommonService', 'WeDownloadNotificationService', function ($translate, amMoment, WeDownloadCommonService, WeDownloadNotificationService) {
+    angular.module('weDownload').factory('weDownloadLocalizationService', ['$translate', 'amMoment', 'weDownloadCommonService', 'weDownloadNotificationService', function ($translate, amMoment, weDownloadCommonService, weDownloadNotificationService) {
         return {
             applyLanguage: function (lang) {
                 $translate.use(lang);
@@ -28,7 +28,7 @@
                     confirmButtonText: this.getLocalizedText('OK')
                 };
 
-                WeDownloadCommonService.showDialog(title, text, type, callback, options);
+                weDownloadCommonService.showDialog(title, text, type, callback, options);
             },
             showError: function (text, callback) {
                 this.showDialog('Error', text, 'error', callback);
@@ -52,7 +52,7 @@
                 extendSettings.confirmButtonText = this.getLocalizedText('OK');
                 extendSettings.cancelButtonText = this.getLocalizedText('Cancel');
 
-                WeDownloadCommonService.confirm(title, text, type, callback, notClose, extendSettings);
+                weDownloadCommonService.confirm(title, text, type, callback, notClose, extendSettings);
             },
             notifyViaBrowser: function (title, content, options) {
                 if (title) {
@@ -63,7 +63,7 @@
                     content = this.getLocalizedText(content);
                 }
 
-                return WeDownloadNotificationService.notifyViaBrowser(title, content, options);
+                return weDownloadNotificationService.notifyViaBrowser(title, content, options);
             },
             notifyInPage: function (title, content, options) {
                 if (!options) {
@@ -78,7 +78,7 @@
                     content = this.getLocalizedText(content, options.contentParams);
                 }
 
-                return WeDownloadNotificationService.notifyInPage(title, content, options);
+                return weDownloadNotificationService.notifyInPage(title, content, options);
             },
             notifyTaskComplete: function (task) {
                 this.notifyViaBrowser('Download Completed', (task && task.taskName ? task.taskName : ''));

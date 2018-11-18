@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').directive('ngSetting', ['$timeout', '$q', 'WeDownloadConstants', 'WeDownloadLocalizationService', 'aria2SettingService', function ($timeout, $q, WeDownloadConstants, WeDownloadLocalizationService, aria2SettingService) {
+    angular.module('weDownload').directive('ngSetting', ['$timeout', '$q', 'weDownloadConstants', 'weDownloadLocalizationService', 'aria2SettingService', function ($timeout, $q, weDownloadConstants, weDownloadLocalizationService, aria2SettingService) {
         return {
             restrict: 'E',
             templateUrl: 'views/setting.html',
@@ -16,8 +16,8 @@
             link: function (scope, element, attrs, ngModel) {
                 var pendingSaveRequest = null;
                 var options = {
-                    lazySaveTimeout: WeDownloadConstants.lazySaveTimeout,
-                    errorTooltipDelay: WeDownloadConstants.errorTooltipDelay
+                    lazySaveTimeout: weDownloadConstants.lazySaveTimeout,
+                    errorTooltipDelay: weDownloadConstants.errorTooltipDelay
                 };
 
                 angular.extend(options, attrs);
@@ -47,7 +47,7 @@
                         }
 
                         angular.element(element).tooltip({
-                            title: WeDownloadLocalizationService.getLocalizedText(cause, causeParams),
+                            title: weDownloadLocalizationService.getLocalizedText(cause, causeParams),
                             trigger: 'focus',
                             placement: 'auto top',
                             container: element,

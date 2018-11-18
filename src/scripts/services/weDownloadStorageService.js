@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadStorageService', ['$window', 'localStorageService', function ($window, localStorageService) {
+    angular.module('weDownload').factory('weDownloadStorageService', ['$window', 'localStorageService', function ($window, localStorageService) {
         return {
             isLocalStorageSupported: function () {
                 return localStorageService.isSupported;

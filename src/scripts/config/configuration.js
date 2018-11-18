@@ -1,23 +1,23 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').config(['$qProvider', '$translateProvider', 'localStorageServiceProvider', 'NotificationProvider', 'WeDownloadConstants', 'WeDownloadLanguages', function ($qProvider, $translateProvider, localStorageServiceProvider, NotificationProvider, WeDownloadConstants, WeDownloadLanguages) {
+    angular.module('weDownload').config(['$qProvider', '$translateProvider', 'localStorageServiceProvider', 'NotificationProvider', 'weDownloadConstants', 'weDownloadLanguages', function ($qProvider, $translateProvider, localStorageServiceProvider, NotificationProvider, weDownloadConstants, weDownloadLanguages) {
         $qProvider.errorOnUnhandledRejections(false);
 
         localStorageServiceProvider
-            .setPrefix(WeDownloadConstants.appPrefix)
+            .setPrefix(weDownloadConstants.appPrefix)
             .setStorageType('localStorage')
             .setStorageCookie(365, '/');
 
         var supportedLangs = [];
         var languageAliases = {};
 
-        for (var langName in WeDownloadLanguages) {
-            if (!WeDownloadLanguages.hasOwnProperty(langName)) {
+        for (var langName in weDownloadLanguages) {
+            if (!weDownloadLanguages.hasOwnProperty(langName)) {
                 continue;
             }
 
-            var language = WeDownloadLanguages[langName];
+            var language = weDownloadLanguages[langName];
             var aliases = language.aliases;
 
             supportedLangs.push(langName);
@@ -32,14 +32,14 @@
             }
         }
 
-        $translateProvider.useLoader('WeDownloadLanguageLoader')
+        $translateProvider.useLoader('weDownloadLanguageLoader')
             .useLoaderCache(true)
             .registerAvailableLanguageKeys(supportedLangs, languageAliases)
-            .fallbackLanguage(WeDownloadConstants.defaultLanguage)
+            .fallbackLanguage(weDownloadConstants.defaultLanguage)
             .useSanitizeValueStrategy('escapeParameters');
 
         NotificationProvider.setOptions({
-            delay: WeDownloadConstants.notificationInPageTimeout
+            delay: weDownloadConstants.notificationInPageTimeout
         });
     }]);
 }());

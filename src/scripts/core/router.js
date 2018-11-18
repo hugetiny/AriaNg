@@ -27,13 +27,13 @@
                 templateUrl: 'views/task-detail.html',
                 controller: 'TaskDetailController'
             })
-            .when('/settings/WeDownload', {
-                templateUrl: 'views/settings-WeDownload.html',
-                controller: 'WeDownloadSettingsController'
+            .when('/settings/weDownload', {
+                templateUrl: 'views/settings-weDownload.html',
+                controller: 'weDownloadSettingsController'
             })
-            .when('/settings/WeDownload/:extendType', {
-                templateUrl: 'views/settings-WeDownload.html',
-                controller: 'WeDownloadSettingsController'
+            .when('/settings/weDownload/:extendType', {
+                templateUrl: 'views/settings-weDownload.html',
+                controller: 'weDownloadSettingsController'
             })
             .when('/settings/aria2/basic', {
                 templateUrl: 'views/settings-aria2.html',
@@ -77,7 +77,7 @@
             })
             .when('/debug', {
                 templateUrl: 'views/debug.html',
-                controller: 'WeDownloadDebugController'
+                controller: 'weDownloadDebugController'
             })
             .when('/status', {
                 templateUrl: 'views/status.html',

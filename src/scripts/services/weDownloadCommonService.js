@@ -78,11 +78,23 @@
 
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
-
+                    //TODO convert ed2k and baiduyun
                     if (line.match(/^(http|https|ftp|sftp):\/\/.+$/)) {
                         result.push(line);
                     } else if (line.match(/^magnet:\?.+$/)) {
                         result.push(line);
+                    } else if (line.match(/^(ed2k):\/\/.+$/)){
+
+                        result.push(line)
+                    }else if (line.match(/^(thunder):\/\/.+$/)){
+                        line = base64.decode(line.replace(/thunder:\/\//,'')).replace(/^AA/,'').replace(/ZZ$/,'')
+                        result.push(line)
+                    }else if (line.match(/^(flashget):\/\/.+$/)){
+                        line = base64.decode(line.replace(/flashget:\/\//,'')).replace(/\[FLASHGET\]/,'')
+                        result.push(line)
+                    }else if (line.match(/^(qqdl):\/\/.+$/)){
+                        line = base64.decode(line.replace(/qqdl:\/\//,''))
+                        result.push(line)
                     }
                 }
 

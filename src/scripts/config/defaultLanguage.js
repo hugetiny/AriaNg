@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').config(['$translateProvider', 'WeDownloadConstants', function ($translateProvider, WeDownloadConstants) {
+    angular.module('weDownload').config(['$translateProvider', 'weDownloadConstants', function ($translateProvider, weDownloadConstants) {
         var defaultLanguageResource = {
             'Operation Result': 'Operation Result',
             'Operation Succeeded': 'Operation Succeeded',
@@ -59,7 +59,7 @@
             'Uncompleted': 'Uncompleted',
             'Click to pin': 'Click to pin',
             'Settings': 'Settings',
-            'WeDownload Settings': 'WeDownload Settings',
+            'weDownload Settings': 'weDownload Settings',
             'Aria2 Settings': 'Aria2 Settings',
             'Basic Settings': 'Basic Settings',
             'HTTP/FTP/SFTP Settings': 'HTTP/FTP/SFTP Settings',
@@ -69,7 +69,7 @@
             'Metalink Settings': 'Metalink Settings',
             'RPC Settings': 'RPC Settings',
             'Advanced Settings': 'Advanced Settings',
-            'WeDownload Debug Console': 'WeDownload Debug Console',
+            'weDownload Debug Console': 'weDownload Debug Console',
             'Aria2 Status': 'Aria2 Status',
             'File Name': 'File Name',
             'File Size': 'File Size',
@@ -119,7 +119,7 @@
             'No connected peers': 'No connected peers',
             'Failed to change some tasks state.': 'Failed to change some tasks state.',
             'Confirm Retry': 'Confirm Retry',
-            'Are you sure you want to retry the selected task? WeDownload will create same task after clicking OK.': 'Are you sure you want to retry the selected task? WeDownload will create same task after clicking OK.',
+            'Are you sure you want to retry the selected task? weDownload will create same task after clicking OK.': 'Are you sure you want to retry the selected task? weDownload will create same task after clicking OK.',
             'Failed to retry this task.': 'Failed to retry this task.',
             '{{successCount}} tasks have been retried and {{failedCount}} tasks are failed.': '{{successCount}} tasks have been retried and {{failedCount}} tasks are failed.',
             'Confirm Remove': 'Confirm Remove',
@@ -174,16 +174,16 @@
             'RPC List Display Order': 'RPC List Display Order',
             'Recently Used': 'Recently Used',
             'RPC Alias': 'RPC Alias',
-            'Import / Export WeDownload Settings': 'Import / Export WeDownload Settings',
+            'Import / Export weDownload Settings': 'Import / Export weDownload Settings',
             'Import Settings': 'Import Settings',
             'Export Settings': 'Export Settings',
-            'WeDownload settings data': 'WeDownload settings data',
+            'weDownload settings data': 'weDownload settings data',
             'Confirm Import': 'Confirm Import',
             'Are you sure you want to import all settings?': 'Are you sure you want to import all settings?',
             'Invalid settings data format!': 'Invalid settings data format!',
             'Data has been copied to clipboard.': 'Data has been copied to clipboard.',
             'Supported Placeholder': 'Supported Placeholder',
-            'WeDownload Title': 'WeDownload Title',
+            'weDownload Title': 'weDownload Title',
             'Downloading Count': 'Downloading Count',
             'Waiting Count': 'Waiting Count',
             'Stopped Count': 'Stopped Count',
@@ -218,7 +218,7 @@
             'WebSocket': 'WebSocket',
             'WebSocket (Disabled)': 'WebSocket (Disabled)',
             'WebSocket (Security)': 'WebSocket (Security)',
-            'Http and WebSocket would be disabled when accessing WeDownload via Https.': 'Http and WebSocket would be disabled when accessing WeDownload via Https.',
+            'Http and WebSocket would be disabled when accessing weDownload via Https.': 'Http and WebSocket would be disabled when accessing weDownload via Https.',
             'POST': 'POST',
             'GET': 'GET',
             'Disabled': 'Disabled',
@@ -238,10 +238,10 @@
             'RPC host cannot be empty!': 'RPC host cannot be empty!',
             'RPC secret is not base64 encoded!': 'RPC secret is not base64 encoded!',
             'URL is not base64 encoded!': 'URL is not base64 encoded!',
-            'Tap to configure and get started with WeDownload.': 'Tap to configure and get started with WeDownload.',
+            'Tap to configure and get started with weDownload.': 'Tap to configure and get started with weDownload.',
             'Cannot initialize WebSocket!': 'Cannot initialize WebSocket!',
             'Access Denied!': 'Access Denied!',
-            'You cannot use WeDownload because this browser does not support data storage.': 'You cannot use WeDownload because this browser does not support data storage.',
+            'You cannot use weDownload because this browser does not support data storage.': 'You cannot use weDownload because this browser does not support data storage.',
             'error': {
                 'unknown': 'Unknown error occurred.',
                 'operation.timeout': 'Operation timed out.',
@@ -659,6 +659,6 @@
             }
         };
 
-        $translateProvider.translations(WeDownloadConstants.defaultLanguage, defaultLanguageResource);
+        $translateProvider.translations(weDownloadConstants.defaultLanguage, defaultLanguageResource);
     }]);
 }());

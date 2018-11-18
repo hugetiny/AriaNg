@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('aria2HttpRpcService', ['$http', 'WeDownloadCommonService', 'WeDownloadSettingService', 'WeDownloadLogService', function ($http, WeDownloadCommonService, WeDownloadSettingService, WeDownloadLogService) {
-        var rpcUrl = WeDownloadSettingService.getCurrentRpcUrl();
-        var method = WeDownloadSettingService.getCurrentRpcHttpMethod();
+    angular.module('weDownload').factory('aria2HttpRpcService', ['$http', 'weDownloadCommonService', 'weDownloadSettingService', 'weDownloadLogService', function ($http, weDownloadCommonService, weDownloadSettingService, weDownloadLogService) {
+        var rpcUrl = weDownloadSettingService.getCurrentRpcUrl();
+        var method = weDownloadSettingService.getCurrentRpcHttpMethod();
 
         var getUrlWithQueryString = function (url, parameters) {
             if (!url || url.length < 1) {
@@ -29,7 +29,7 @@
 
                 if (angular.isObject(value) || angular.isArray(value)) {
                     value = angular.toJson(value);
-                    value = WeDownloadCommonService.base64Encode(value);
+                    value = weDownloadCommonService.base64Encode(value);
                     value = encodeURIComponent(value);
                 }
 
@@ -66,12 +66,12 @@
                     requestContext.url = getUrlWithQueryString(requestContext.url, context.requestBody);
                 }
 
-                WeDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'request start', requestContext);
+                weDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'request start', requestContext);
 
                 return $http(requestContext).then(function onSuccess(response) {
                     var data = response.data;
 
-                    WeDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response success', response);
+                    weDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response success', response);
 
                     if (!data) {
                         return;
@@ -83,7 +83,7 @@
                 }).catch(function onError(response) {
                     var data = response.data;
 
-                    WeDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response error', response);
+                    weDownloadLogService.debug('[aria2HttpRpcService.request] ' + (context && context.requestBody && context.requestBody.method ? context.requestBody.method + ' ' : '') + 'response error', response);
 
                     if (!data) {
                         data = {

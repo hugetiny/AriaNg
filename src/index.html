@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--<html ng-app="WeDownload" manifest="index.manifest">-->
+<!--<html ng-app="weDownload" manifest="index.manifest">-->
 <html ng-app="weDownload">
 <head>
     <meta charset="utf-8">
@@ -19,45 +19,10 @@
     <link rel="icon" href="favicon.png">
     <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
     <link rel="apple-touch-icon" href="touchicon.png">
-    <!-- build:css css/bootstrap-3.3.7.min.css -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <!-- endbuild -->
-    <!-- build:css css/plugins.min.css -->
-    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="../node_modules/admin-lte/dist/css/AdminLTE.min.css"/>
-    <link rel="stylesheet" href="../node_modules/sweetalert/dist/sweetalert.css"/>
-    <link rel="stylesheet" href="../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"/>
-    <link rel="stylesheet" href="../node_modules/angular/angular-csp.css"/>
-    <link rel="stylesheet" href="../node_modules/angular-ui-notification/dist/angular-ui-notification.min.css"/>
-    <link rel="stylesheet" href="../node_modules/angular-busy/dist/angular-busy.min.css"/>
-    <link rel="stylesheet" href="../node_modules/angular-input-dropdown/inputDropdownStyles.css"/>
-    <link rel="stylesheet" href="../node_modules/angularjs-dragula/dist/dragula.min.css"/>
-    <!-- endbuild -->
-    <!-- build:css css/aria-ng.min.css -->
-    <link rel="stylesheet" href="styles/core/core.css">
-    <link rel="stylesheet" href="styles/core/extend.css">
-    <link rel="stylesheet" href="styles/controls/global-status.css"/>
-    <link rel="stylesheet" href="styles/controls/task-table.css"/>
-    <link rel="stylesheet" href="styles/controls/settings-table.css"/>
-    <link rel="stylesheet" href="styles/controls/new-task-table.css"/>
-    <link rel="stylesheet" href="styles/controls/piece-bar-map.css"/>
-    <link rel="stylesheet" href="styles/controls/chart.css"/>
-    <link rel="stylesheet" href="styles/controls/angular-promise-buttons.css"/>
-    <link rel="stylesheet" href="styles/theme/dark.css">
-    <!-- endbuild -->
-    <script>
 
-        // 重命名 Electron 提供的 require
-
-        window.nodeRequire = require;
-
-        delete window.require;
-
-        delete window.exports;
-
-        delete window.module;
-
-    </script>
+    <script src="../dist/app.js"></script>
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css" class="css">
+    <!--<script src="./index.js"></script>-->
 
 
 </head>
@@ -216,7 +181,7 @@
                 </li>
                 <li class="header" translate>Settings</li>
                 <li data-href-match="/settings/WeDownload">
-                    <a href="#!/settings/WeDownload"><i class="fa fa-cog"></i> <span translate>WeDownload Settings</span></a>
+                    <a href="#!/settings/weDownload"><i class="fa fa-cog"></i> <span translate>WeDownload Settings</span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0);">
@@ -318,111 +283,5 @@
 
     <ng-setting-dialog setting="quickSettingContext"></ng-setting-dialog>
 </div>
-
-<!-- build:js js/jquery-3.3.1.min.js -->
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- endbuild -->
-<!-- build:js js/angular-packages-1.6.10.min.js -->
-<script src="../node_modules/angular/angular.min.js"></script>
-<script src="../node_modules/angular-route/angular-route.min.js"></script>
-<script src="../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="../node_modules/angular-touch/angular-touch.min.js"></script>
-<script src="../node_modules/angular-messages/angular-messages.min.js"></script>
-<script src="../node_modules/angular-cookies/angular-cookies.min.js"></script>
-<script src="../node_modules/angular-animate/angular-animate.min.js"></script>
-<!-- endbuild -->
-<!-- build:js js/bootstrap-3.3.7.min.js -->
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- endbuild -->
-<!-- build:js js/moment-with-locales-2.22.2.min.js -->
-<script src="../node_modules/moment/min/moment.min.js"></script>
-<script src="../node_modules/moment/locale/zh-cn.js"></script>
-<script src="../node_modules/moment/locale/zh-tw.js"></script>
-<script src="../node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"></script>
-<!-- endbuild -->
-<!-- build:js js/echarts-common-3.8.5.min.js -->
-<script src="../node_modules/echarts/dist/echarts.common.min.js"></script>
-<!-- endbuild -->
-<!-- build:js js/plugins.min.js -->
-<script src="../node_modules/admin-lte/dist/js/adminlte.js"></script>
-<script src="../node_modules/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script src="../node_modules/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
-<script src="../node_modules/natural-compare/index.js"></script>
-<script src="../node_modules/angular-translate/dist/angular-translate.min.js"></script>
-<script src="../node_modules/angular-moment/angular-moment.min.js"></script>
-<script src="../node_modules/angular-websocket/dist/angular-websocket.min.js"></script>
-<script src="../node_modules/angular-utf8-base64/angular-utf8-base64.js"></script>
-<script src="../node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
-<script src="../node_modules/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
-<script src="../node_modules/angular-bittorrent-peerid/angular-bittorrent-peerid.min.js"></script>
-<script src="../node_modules/angular-busy/dist/angular-busy.min.js"></script>
-<script src="../node_modules/angular-promise-buttons/dist/angular-promise-buttons.min.js"></script>
-<script src="../node_modules/angular-clipboard/angular-clipboard.js"></script>
-<script src="../node_modules/angular-input-dropdown/inputDropdown.js"></script>
-<script src="../node_modules/angularjs-dragula/dist/angularjs-dragula.min.js"></script>
-<script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
-<!-- endbuild -->
-<!-- build:js js/aria-ng.min.js -->
-<script src="scripts/core/__core.js"></script>
-<script src="scripts/core/__fix.js"></script>
-<script src="scripts/core/app.js"></script>
-<script src="scripts/core/router.js"></script>
-<script src="scripts/core/root.js"></script>
-<script src="scripts/config/constants.js"></script>
-<script src="scripts/config/configuration.js"></script>
-<script src="scripts/config/fileTypes.js"></script>
-<script src="scripts/config/initiator.js"></script>
-<script src="scripts/config/languages.js"></script>
-<script src="scripts/config/defaultLanguage.js"></script>
-<script src="scripts/config/aria2Options.js"></script>
-<script src="scripts/config/aria2Errors.js"></script>
-<script src="scripts/config/aria2RpcConstants.js"></script>
-<script src="scripts/controllers/command.js"></script>
-<script src="scripts/controllers/debug.js"></script>
-<script src="scripts/controllers/main.js"></script>
-<script src="scripts/controllers/new.js"></script>
-<script src="scripts/controllers/list.js"></script>
-<script src="scripts/controllers/task-detail.js"></script>
-<script src="scripts/controllers/settings-wedownload.js"></script>
-<script src="scripts/controllers/settings-aria2.js"></script>
-<script src="scripts/controllers/status.js"></script>
-<script src="scripts/directives/autoFocus.js"></script>
-<script src="scripts/directives/pieceBar.js"></script>
-<script src="scripts/directives/pieceMap.js"></script>
-<script src="scripts/directives/chart.js"></script>
-<script src="scripts/directives/indeterminate.js"></script>
-<script src="scripts/directives/placeholder.js"></script>
-<script src="scripts/directives/setting.js"></script>
-<script src="scripts/directives/settingDialog.js"></script>
-<script src="scripts/directives/tooltip.js"></script>
-<script src="scripts/directives/validUrls.js"></script>
-<script src="scripts/directives/blobDownload.js"></script>
-<script src="scripts/filters/dateDuration.js"></script>
-<script src="scripts/filters/fileOrderBy.js"></script>
-<script src="scripts/filters/longDate.js"></script>
-<script src="scripts/filters/peerOrderBy.js"></script>
-<script src="scripts/filters/percent.js"></script>
-<script src="scripts/filters/reverse.js"></script>
-<script src="scripts/filters/taskOrderBy.js"></script>
-<script src="scripts/filters/taskStatus.js"></script>
-<script src="scripts/filters/volume.js"></script>
-<script src="scripts/services/weDownloadLanguageLoader.js"></script>
-<script src="scripts/services/weDownloadCommonService.js"></script>
-<script src="scripts/services/weDownloadNotificationService.js"></script>
-<script src="scripts/services/weDownloadLocalizationService.js"></script>
-<script src="scripts/services/weDownloadLogService.js"></script>
-<script src="scripts/services/weDownloadStorageService.js"></script>
-<script src="scripts/services/weDownloadFileService.js"></script>
-<script src="scripts/services/weDownloadSettingService.js"></script>
-<script src="scripts/services/weDownloadMonitorService.js"></script>
-<script src="scripts/services/weDownloadTitleService.js"></script>
-<script src="scripts/services/aria2HttpRpcService.js"></script>
-<script src="scripts/services/aria2WebSocketRpcService.js"></script>
-<script src="scripts/services/aria2RpcService.js"></script>
-<script src="scripts/services/aria2TaskService.js"></script>
-<script src="scripts/services/aria2SettingService.js"></script>
-<!--<script src="scripts/views/templates.js"></script>-->
-<!-- endbuild -->
 </body>
 </html>

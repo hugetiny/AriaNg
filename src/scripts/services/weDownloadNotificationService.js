@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadNotificationService', ['$window', 'Notification', 'WeDownloadSettingService', function ($window, Notification, WeDownloadSettingService) {
+    angular.module('weDownload').factory('weDownloadNotificationService', ['$window', 'Notification', 'weDownloadSettingService', function ($window, Notification, weDownloadSettingService) {
         var isSupportBrowserNotification = !!$window.Notification;
 
         var isBrowserNotifactionGranted = function (permission) {
@@ -65,7 +65,7 @@
 
                 requestBrowserNotifactionPermission(function (result) {
                     if (!result.granted) {
-                        WeDownloadSettingService.setBrowserNotification(false);
+                        weDownloadSettingService.setBrowserNotification(false);
                     }
 
                     if (callback) {
@@ -80,7 +80,7 @@
 
                 options.body = content;
 
-                if (isSupportBrowserNotification && WeDownloadSettingService.getBrowserNotification()) {
+                if (isSupportBrowserNotification && weDownloadSettingService.getBrowserNotification()) {
                     showBrowserNotifaction(title, options);
                 }
             },

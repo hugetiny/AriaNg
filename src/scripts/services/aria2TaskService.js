@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('aria2TaskService', ['$q', 'bittorrentPeeridService', 'WeDownloadConstants', 'aria2Errors', 'aria2RpcService', 'WeDownloadCommonService', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadSettingService', function ($q, bittorrentPeeridService, WeDownloadConstants, aria2Errors, aria2RpcService, WeDownloadCommonService, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadSettingService) {
+    angular.module('weDownload').factory('aria2TaskService', ['$q', 'bittorrentPeeridService', 'weDownloadConstants', 'aria2Errors', 'aria2RpcService', 'weDownloadCommonService', 'weDownloadLocalizationService', 'weDownloadLogService', 'weDownloadSettingService', function ($q, bittorrentPeeridService, weDownloadConstants, aria2Errors, aria2RpcService, weDownloadCommonService, weDownloadLocalizationService, weDownloadLogService, weDownloadSettingService) {
         var getFileName = function (file) {
             if (!file) {
-                WeDownloadLogService.warn('[aria2TaskService.getFileName] file is null');
+                weDownloadLogService.warn('[aria2TaskService.getFileName] file is null');
                 return '';
             }
 
@@ -44,7 +44,7 @@
             }
 
             if (!taskName) {
-                taskName = WeDownloadLocalizationService.getLocalizedText('Unknown');
+                taskName = weDownloadLocalizationService.getLocalizedText('Unknown');
                 success = false;
             }
 
@@ -59,21 +59,21 @@
             var relativePath = file.path;
 
             if (downloadPath) {
-                downloadPath = downloadPath.replace(/\\/g, WeDownloadConstants.defaultPathSeparator);
+                downloadPath = downloadPath.replace(/\\/g, weDownloadConstants.defaultPathSeparator);
             }
 
             if (relativePath) {
-                relativePath = relativePath.replace(/\\/g, WeDownloadConstants.defaultPathSeparator);
+                relativePath = relativePath.replace(/\\/g, weDownloadConstants.defaultPathSeparator);
             }
 
             var trimStartPathSeparator = function () {
-                if (relativePath.length > 1 && relativePath.charAt(0) === WeDownloadConstants.defaultPathSeparator) {
+                if (relativePath.length > 1 && relativePath.charAt(0) === weDownloadConstants.defaultPathSeparator) {
                     relativePath = relativePath.substr(1);
                 }
             };
 
             var trimEndPathSeparator = function () {
-                if (relativePath.length > 1 && relativePath.charAt(relativePath.length - 1) === WeDownloadConstants.defaultPathSeparator) {
+                if (relativePath.length > 1 && relativePath.charAt(relativePath.length - 1) === weDownloadConstants.defaultPathSeparator) {
                     relativePath = relativePath.substr(0, relativePath.length - 1);
                 }
             };
@@ -115,7 +115,7 @@
 
             if (path.length) {
                 var parentPath = '';
-                var lastSeparatorIndex = path.lastIndexOf(WeDownloadConstants.defaultPathSeparator);
+                var lastSeparatorIndex = path.lastIndexOf(weDownloadConstants.defaultPathSeparator);
 
                 if (lastSeparatorIndex > 0) {
                     parentPath = path.substring(0, lastSeparatorIndex);
@@ -267,7 +267,7 @@
 
         var processDownloadTask = function (task, addVirtualFileNode) {
             if (!task) {
-                WeDownloadLogService.warn('[aria2TaskService.processDownloadTask] task is null');
+                weDownloadLogService.warn('[aria2TaskService.processDownloadTask] task is null');
                 return task;
             }
 
@@ -287,7 +287,7 @@
             task.downloadSpeed = parseInt(task.downloadSpeed);
 
             task.numPieces = parseInt(task.numPieces);
-            task.completedPieces = WeDownloadCommonService.countArray(pieceStatus, true);
+            task.completedPieces = weDownloadCommonService.countArray(pieceStatus, true);
             task.pieceLength = parseInt(task.pieceLength);
 
             task.idle = task.downloadSpeed === 0;
@@ -353,19 +353,19 @@
                 }
             }
 
-            WeDownloadLogService.debug('[aria2TaskService.processDownloadTask] process success', task);
+            weDownloadLogService.debug('[aria2TaskService.processDownloadTask] process success', task);
 
             return task;
         };
 
         var processBtPeers = function (peers, task, includeLocalPeer) {
             if (!peers) {
-                WeDownloadLogService.warn('[aria2TaskService.processBtPeers] peers is null');
+                weDownloadLogService.warn('[aria2TaskService.processBtPeers] peers is null');
                 return peers;
             }
 
             var localTaskCompletedPieces = getPieceStatus(task.bitfield, task.numPieces);
-            var localTaskCompletedPieceCount = WeDownloadCommonService.countArray(localTaskCompletedPieces, true);
+            var localTaskCompletedPieceCount = weDownloadCommonService.countArray(localTaskCompletedPieces, true);
             var localTaskCompletedPercent = task.completePercent;
 
             for (var i = 0; i < peers.length; i++) {
@@ -373,7 +373,7 @@
                 var upstreamToSpeed = peer.uploadSpeed;
                 var downstreamFromSpeed = peer.downloadSpeed;
                 var completedPieces = getPieceStatus(peer.bitfield, task.numPieces);
-                var completedPieceCount = WeDownloadCommonService.countArray(completedPieces, true);
+                var completedPieceCount = weDownloadCommonService.countArray(completedPieces, true);
 
                 peer.name = peer.ip + ':' + peer.port;
                 peer.completePercent = completedPieceCount / task.numPieces * 100;
@@ -386,7 +386,7 @@
                 }
 
                 if (peer.peerId) {
-                    var peerId = WeDownloadCommonService.decodePercentEncodedString(peer.peerId);
+                    var peerId = weDownloadCommonService.decodePercentEncodedString(peer.peerId);
                     var clientInfo = (peerId ? bittorrentPeeridService.parseClient(peerId) : null);
 
                     if (clientInfo && clientInfo.client !== 'unknown') {

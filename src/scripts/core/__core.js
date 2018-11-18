@@ -1,6 +1,6 @@
 /*!
- * WeDownload
- * https://github.com/mayswind/WeDownload
+ * weDownload
+ * https://github.com/mayswind/weDownload
  */
 
 (function () {
@@ -21,7 +21,7 @@
     if (ltIE10) {
         var tip = document.createElement('div');
         tip.className = 'alert alert-danger';
-        tip.innerHTML = 'Sorry, WeDownload cannot support this browser, please upgrade your browser!';
+        tip.innerHTML = 'Sorry, weDownload cannot support this browser, please upgrade your browser!';
         document.getElementById('content-wrapper').appendChild(tip);
     }
 }());

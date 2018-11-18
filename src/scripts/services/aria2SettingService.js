@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('aria2SettingService', ['WeDownloadConstants', 'aria2AllOptions', 'aria2GlobalAvailableOptions', 'aria2QuickSettingsAvailableOptions', 'aria2TaskAvailableOptions', 'aria2RpcService', 'WeDownloadLogService', 'WeDownloadStorageService', function (WeDownloadConstants, aria2AllOptions, aria2GlobalAvailableOptions, aria2QuickSettingsAvailableOptions, aria2TaskAvailableOptions, aria2RpcService, WeDownloadLogService, WeDownloadStorageService) {
+    angular.module('weDownload').factory('aria2SettingService', ['weDownloadConstants', 'aria2AllOptions', 'aria2GlobalAvailableOptions', 'aria2QuickSettingsAvailableOptions', 'aria2TaskAvailableOptions', 'aria2RpcService', 'weDownloadLogService', 'weDownloadStorageService', function (weDownloadConstants, aria2AllOptions, aria2GlobalAvailableOptions, aria2QuickSettingsAvailableOptions, aria2TaskAvailableOptions, aria2RpcService, weDownloadLogService, weDownloadStorageService) {
         var processStatResult = function (stat) {
             if (!stat) {
                 return stat;
@@ -17,7 +17,7 @@
         };
 
         var getSettingHistoryKey = function (key) {
-            return WeDownloadConstants.settingHistoryKeyPrefix + '.' + key;
+            return weDownloadConstants.settingHistoryKeyPrefix + '.' + key;
         };
 
         return {
@@ -187,10 +187,10 @@
                 }
 
                 var storageKey = getSettingHistoryKey(key);
-                var history = WeDownloadStorageService.get(storageKey) || [];
+                var history = weDownloadStorageService.get(storageKey) || [];
                 var newHistory = [];
 
-                for (var i = 0; i < Math.min(history.length, WeDownloadConstants.historyMaxStoreCount); i++) {
+                for (var i = 0; i < Math.min(history.length, weDownloadConstants.historyMaxStoreCount); i++) {
                     newHistory.push(history[i]);
                 }
 
@@ -202,25 +202,25 @@
                 }
 
                 var storageKey = getSettingHistoryKey(key);
-                var history = WeDownloadStorageService.get(storageKey) || [];
+                var history = weDownloadStorageService.get(storageKey) || [];
                 var newHistory = [];
                 newHistory.push(value);
 
-                for (var i = 0; i < Math.min(history.length, WeDownloadConstants.historyMaxStoreCount - 1); i++) {
+                for (var i = 0; i < Math.min(history.length, weDownloadConstants.historyMaxStoreCount - 1); i++) {
                     if (history[i] !== value) {
                         newHistory.push(history[i]);
                     }
                 }
 
-                WeDownloadStorageService.set(storageKey, newHistory);
+                weDownloadStorageService.set(storageKey, newHistory);
 
                 return newHistory;
             },
             clearSettingsHistorys: function () {
-                var keys = WeDownloadStorageService.keys(WeDownloadConstants.settingHistoryKeyPrefix + '.');
+                var keys = weDownloadStorageService.keys(weDownloadConstants.settingHistoryKeyPrefix + '.');
 
                 for (var i = 0; i < keys.length; i++) {
-                    WeDownloadStorageService.remove(keys[i]);
+                    weDownloadStorageService.remove(keys[i]);
                 }
             },
             getGlobalOption: function (callback, silent) {
@@ -250,7 +250,7 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            WeDownloadLogService.warn('[aria2SettingService.getGlobalStat] callback is null');
+                            weDownloadLogService.warn('[aria2SettingService.getGlobalStat] callback is null');
                             return;
                         }
 

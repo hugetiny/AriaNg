@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').controller('WeDownloadSettingsController', ['$rootScope', '$scope', '$routeParams', '$window', '$interval', '$timeout', '$filter', 'clipboard', 'WeDownloadLanguages', 'WeDownloadCommonService', 'WeDownloadNotificationService', 'WeDownloadLocalizationService', 'WeDownloadLogService', 'WeDownloadFileService', 'WeDownloadSettingService', 'WeDownloadMonitorService', 'WeDownloadTitleService', 'aria2SettingService', function ($rootScope, $scope, $routeParams, $window, $interval, $timeout, $filter, clipboard, WeDownloadLanguages, WeDownloadCommonService, WeDownloadNotificationService, WeDownloadLocalizationService, WeDownloadLogService, WeDownloadFileService, WeDownloadSettingService, WeDownloadMonitorService, WeDownloadTitleService, aria2SettingService) {
+    angular.module('weDownload').controller('weDownloadSettingsController', ['$rootScope', '$scope', '$routeParams', '$window', '$interval', '$timeout', '$filter', 'clipboard', 'weDownloadLanguages', 'weDownloadCommonService', 'weDownloadNotificationService', 'weDownloadLocalizationService', 'weDownloadLogService', 'weDownloadFileService', 'weDownloadSettingService', 'weDownloadMonitorService', 'weDownloadTitleService', 'aria2SettingService', function ($rootScope, $scope, $routeParams, $window, $interval, $timeout, $filter, clipboard, weDownloadLanguages, weDownloadCommonService, weDownloadNotificationService, weDownloadLocalizationService, weDownloadLogService, weDownloadFileService, weDownloadSettingService, weDownloadMonitorService, weDownloadTitleService, aria2SettingService) {
         var extendType = $routeParams.extendType;
         var lastRefreshPageNotification = null;
 
         var getFinalTitle = function () {
-            return WeDownloadTitleService.getFinalTitleByGlobalStat(WeDownloadMonitorService.getCurrentGlobalStat());
+            return weDownloadTitleService.getFinalTitleByGlobalStat(weDownloadMonitorService.getCurrentGlobalStat());
         };
 
         var setNeedRefreshPage = function () {
@@ -20,7 +20,7 @@
                 $window.location.reload();
             };
 
-            lastRefreshPageNotification = WeDownloadLocalizationService.notifyInPage('', 'Configuration has been modified, please reload the page for the changes to take effect.', {
+            lastRefreshPageNotification = weDownloadLocalizationService.notifyInPage('', 'Configuration has been modified, please reload the page for the changes to take effect.', {
                 delay: false,
                 type: 'info',
                 templateUrl: 'setting-changed-notification.html',
@@ -33,16 +33,16 @@
 
         $scope.context = {
             currentTab: 'global',
-            languages: WeDownloadLanguages,
+            languages: weDownloadLanguages,
             titlePreview: getFinalTitle(),
-            availableTime: WeDownloadCommonService.getTimeOptions([1000, 2000, 3000, 5000, 10000, 30000, 60000], true),
+            availableTime: weDownloadCommonService.getTimeOptions([1000, 2000, 3000, 5000, 10000, 30000, 60000], true),
             trueFalseOptions: [{name: 'True', value: true}, {name: 'False', value: false}],
             showRpcSecret: false,
-            isInsecureProtocolDisabled: WeDownloadSettingService.isInsecureProtocolDisabled(),
-            settings: WeDownloadSettingService.getAllOptions(),
-            sessionSettings: WeDownloadSettingService.getAllSessionOptions(),
-            rpcSettings: WeDownloadSettingService.getAllRpcSettings(),
-            isSupportBlob: WeDownloadFileService.isSupportBlob(),
+            isInsecureProtocolDisabled: weDownloadSettingService.isInsecureProtocolDisabled(),
+            settings: weDownloadSettingService.getAllOptions(),
+            sessionSettings: weDownloadSettingService.getAllSessionOptions(),
+            rpcSettings: weDownloadSettingService.getAllRpcSettings(),
+            isSupportBlob: weDownloadFileService.isSupportBlob(),
             importSettings: null,
             exportSettings: null,
             exportSettingsCopied: false
@@ -112,34 +112,34 @@
         };
 
         $scope.isSupportNotification = function () {
-            return WeDownloadNotificationService.isSupportBrowserNotification() &&
-                WeDownloadSettingService.isCurrentRpcUseWebSocket($scope.context.settings.protocol);
+            return weDownloadNotificationService.isSupportBrowserNotification() &&
+                weDownloadSettingService.isCurrentRpcUseWebSocket($scope.context.settings.protocol);
         };
 
         $scope.setLanguage = function (value) {
-            if (WeDownloadSettingService.setLanguage(value)) {
-                WeDownloadLocalizationService.applyLanguage(value);
+            if (weDownloadSettingService.setLanguage(value)) {
+                weDownloadLocalizationService.applyLanguage(value);
             }
 
             $scope.updateTitlePreview();
         };
 
         $scope.setDebugMode = function (value) {
-            WeDownloadSettingService.setDebugMode(value);
+            weDownloadSettingService.setDebugMode(value);
         };
 
         $scope.setTitle = function (value) {
-            WeDownloadSettingService.setTitle(value);
+            weDownloadSettingService.setTitle(value);
         };
 
         $scope.setEnableBrowserNotification = function (value) {
-            WeDownloadSettingService.setBrowserNotification(value);
+            weDownloadSettingService.setBrowserNotification(value);
 
-            if (value && !WeDownloadNotificationService.hasBrowserPermission()) {
-                WeDownloadNotificationService.requestBrowserPermission(function (result) {
+            if (value && !weDownloadNotificationService.hasBrowserPermission()) {
+                weDownloadNotificationService.requestBrowserPermission(function (result) {
                     if (!result.granted) {
                         $scope.context.settings.browserNotification = false;
-                        WeDownloadLocalizationService.showError('You have disabled notification in your browser. You should change your browser\'s settings before you enable this function.');
+                        weDownloadLocalizationService.showError('You have disabled notification in your browser. You should change your browser\'s settings before you enable this function.');
                     }
                 });
             }
@@ -147,34 +147,34 @@
 
         $scope.setTitleRefreshInterval = function (value) {
             setNeedRefreshPage();
-            WeDownloadSettingService.setTitleRefreshInterval(value);
+            weDownloadSettingService.setTitleRefreshInterval(value);
         };
 
         $scope.setGlobalStatRefreshInterval = function (value) {
             setNeedRefreshPage();
-            WeDownloadSettingService.setGlobalStatRefreshInterval(value);
+            weDownloadSettingService.setGlobalStatRefreshInterval(value);
         };
 
         $scope.setDownloadTaskRefreshInterval = function (value) {
             setNeedRefreshPage();
-            WeDownloadSettingService.setDownloadTaskRefreshInterval(value);
+            weDownloadSettingService.setDownloadTaskRefreshInterval(value);
         };
 
         $scope.setRPCListDisplayOrder = function (value) {
             setNeedRefreshPage();
-            WeDownloadSettingService.setRPCListDisplayOrder(value);
+            weDownloadSettingService.setRPCListDisplayOrder(value);
         };
 
         $scope.setAfterCreatingNewTask = function (value) {
-            WeDownloadSettingService.setAfterCreatingNewTask(value);
+            weDownloadSettingService.setAfterCreatingNewTask(value);
         };
 
         $scope.setRemoveOldTaskAfterRetrying = function (value) {
-            WeDownloadSettingService.setRemoveOldTaskAfterRetrying(value);
+            weDownloadSettingService.setRemoveOldTaskAfterRetrying(value);
         };
 
         $scope.setAfterRetryingTask = function (value) {
-            WeDownloadSettingService.setAfterRetryingTask(value);
+            weDownloadSettingService.setAfterRetryingTask(value);
         };
 
         $scope.showImportSettingsModal = function () {
@@ -186,14 +186,14 @@
             $scope.context.importSettings = null;
         });
 
-        $scope.openWeDownloadConfigFile = function () {
-            WeDownloadFileService.openFileContent({
+        $scope.openweDownloadConfigFile = function () {
+            weDownloadFileService.openFileContent({
                 fileFilter: '.json',
                 fileType: 'text'
             }, function (result) {
                 $scope.context.importSettings = result.content;
             }, function (error) {
-                WeDownloadLocalizationService.showError(error);
+                weDownloadLocalizationService.showError(error);
             }, angular.element('#import-file-holder'));
         };
 
@@ -203,13 +203,13 @@
             try {
                 settingsObj = JSON.parse(settings);
             } catch (e) {
-                WeDownloadLogService.error('[WeDownloadSettingsController.importSettings] parse settings json error', e);
+                weDownloadLogService.error('[weDownloadSettingsController.importSettings] parse settings json error', e);
                 weDownloadLocalizationService.showError('Invalid settings data format!');
                 return;
             }
 
             if (!angular.isObject(settingsObj) || angular.isArray(settingsObj)) {
-                weDownloadLogService.error('[WeDownloadSettingsController.importSettings] settings json is not object');
+                weDownloadLogService.error('[weDownloadSettingsController.importSettings] settings json is not object');
                 weDownloadLocalizationService.showError('Invalid settings data format!');
                 return;
             }

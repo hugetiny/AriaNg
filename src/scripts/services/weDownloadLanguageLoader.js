@@ -107,7 +107,7 @@
                 return deferred.resolve(languageObject);
             }).catch(function onError(response) {
                 weDownloadLogService.warn('[weDownloadLanguageLoader] cannot get language resource');
-                weDownloadNotificationService.notifyInPage('', 'WeDownload cannot get language resources, and will display in default language.', {
+                weDownloadNotificationService.notifyInPage('', 'weDownload cannot get language resources, and will display in default language.', {
                     type: 'error',
                     delay: false
                 });

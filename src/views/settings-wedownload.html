@@ -49,7 +49,7 @@
                             <i class="icon-primary fa fa-question-circle" data-toggle="popover"
                                data-trigger="hover" data-placement="auto right" data-container="body" data-html="true"
                                data-content="{{('Supported Placeholder' | translate) + ':<br/>' +
-                               ('WeDownload Title' | translate) + ': ${title}<br/>' +
+                               ('weDownload Title' | translate) + ': ${title}<br/>' +
                                ('Downloading Count' | translate) + ': ${downloading}<br/>' +
                                 ('Waiting Count' | translate) + ': ${waiting}<br/>' +
                                 ('Stopped Count' | translate) + ': ${stopped}<br/>' +
@@ -166,7 +166,7 @@
                     </div>
                     <div class="row">
                         <div class="setting-key setting-key-without-desc col-sm-4">
-                            <span translate>Import / Export WeDownload Settings</span>
+                            <span translate>Import / Export weDownload Settings</span>
                         </div>
                         <div class="setting-value col-sm-8">
                             <button class="btn btn-sm btn-default" ng-click="showImportSettingsModal()">
@@ -225,7 +225,7 @@
                             <span translate>Aria2 RPC Protocol</span>
                             <span class="asterisk">*</span>
                             <i class="icon-primary fa fa-question-circle" ng-tooltip-container="body" ng-tooltip-placement="top"
-                               ng-tooltip="{{'Http and WebSocket would be disabled when accessing WeDownload via Https.' | translate}}"></i>
+                               ng-tooltip="{{'Http and WebSocket would be disabled when accessing weDownload via Https.' | translate}}"></i>
                         </div>
                         <div class="setting-value col-sm-8">
                             <select class="form-control" style="width: 100%;" ng-model="setting.protocol" ng-change="updateRpcSetting(setting, 'protocol')">
@@ -287,7 +287,7 @@
                     <h4 class="modal-title">
                         <span translate>Import Settings</span>
                         <small>
-                            <a class="pointer-cursor" title="{{'Open' | translate}}" ng-click="openWeDownloadConfigFile()">
+                            <a class="pointer-cursor" title="{{'Open' | translate}}" ng-click="openweDownloadConfigFile()">
                                 <i class="icon-primary fa fa-folder-open-o"></i>
                             </a>
                         </small>
@@ -297,7 +297,7 @@
                     <div class="settings-table striped">
                         <input id="import-file-holder" type="file" style="display: none"/>
                         <textarea class="form-control" ng-model="context.importSettings" rows="20"
-                                  ng-placeholder="'WeDownload settings data' | translate"></textarea>
+                                  ng-placeholder="'weDownload settings data' | translate"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -317,7 +317,7 @@
                         <span translate>Export Settings</span>
                         <small>
                             <a class="pointer-cursor" title="{{'Save' | translate}}" ng-if="context.isSupportBlob"
-                               ng-blob-download="context.exportSettings" ng-file-name="WeDownloadConfig.json" ng-content-type="application/json">
+                               ng-blob-download="context.exportSettings" ng-file-name="weDownloadConfig.json" ng-content-type="application/json">
                                 <i class="icon-primary fa fa-save"></i>
                             </a>
                             <a class="pointer-cursor" title="{{'Copy' | translate}}" ng-click="copyExportSettings()">

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadTitleService', ['$filter', 'WeDownloadConstants', 'WeDownloadLocalizationService', 'WeDownloadSettingService', function ($filter, WeDownloadConstants, WeDownloadLocalizationService, WeDownloadSettingService) {
+    angular.module('weDownload').factory('weDownloadTitleService', ['$filter', 'weDownloadConstants', 'weDownloadLocalizationService', 'weDownloadSettingService', function ($filter, weDownloadConstants, weDownloadLocalizationService, weDownloadSettingService) {
         var parseSettings = function (placeholder) {
             if (!placeholder) {
                 return {};
@@ -63,28 +63,28 @@
 
         var replaceDownloadingCount = function (title, value) {
             return replacePlaceholders(title, 'downloading', {
-                prefix: WeDownloadLocalizationService.getLocalizedText('Downloading') + ': ',
+                prefix: weDownloadLocalizationService.getLocalizedText('Downloading') + ': ',
                 value: value
             });
         };
 
         var replaceWaitingCount = function (title, value) {
             return replacePlaceholders(title, 'waiting', {
-                prefix: WeDownloadLocalizationService.getLocalizedText('Waiting') + ': ',
+                prefix: weDownloadLocalizationService.getLocalizedText('Waiting') + ': ',
                 value: value
             });
         };
 
         var replaceStoppedCount = function (title, value) {
             return replacePlaceholders(title, 'stopped', {
-                prefix: WeDownloadLocalizationService.getLocalizedText('Finished / Stopped') + ': ',
+                prefix: weDownloadLocalizationService.getLocalizedText('Finished / Stopped') + ': ',
                 value: value
             });
         };
 
         var replaceDownloadSpeed = function (title, value) {
             return replacePlaceholders(title, 'downspeed', {
-                prefix: WeDownloadLocalizationService.getLocalizedText('Download') + ': ',
+                prefix: weDownloadLocalizationService.getLocalizedText('Download') + ': ',
                 value: value,
                 type: 'volume',
                 suffix: '/s'
@@ -93,7 +93,7 @@
 
         var replaceUploadSpeed = function (title, value) {
             return replacePlaceholders(title, 'upspeed', {
-                prefix: WeDownloadLocalizationService.getLocalizedText('Upload') + ': ',
+                prefix: weDownloadLocalizationService.getLocalizedText('Upload') + ': ',
                 value: value,
                 type: 'volume',
                 suffix: '/s'
@@ -102,13 +102,13 @@
 
         var replaceAgiaNgTitle = function (title) {
             return replacePlaceholders(title, 'title', {
-                value: WeDownloadConstants.title
+                value: weDownloadConstants.title
             });
         };
 
         return {
             getFinalTitle: function (context) {
-                var title = WeDownloadSettingService.getTitle();
+                var title = weDownloadSettingService.getTitle();
 
                 context = angular.extend({
                     downloadingCount: 0,

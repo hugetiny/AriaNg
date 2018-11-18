@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').run(['moment', 'WeDownloadLocalizationService', 'WeDownloadSettingService', function (moment, WeDownloadLocalizationService, weDownloadSettingService) {
+    angular.module('weDownload').run(['moment', 'weDownloadLocalizationService', 'weDownloadSettingService', function (moment, weDownloadLocalizationService, weDownloadSettingService) {
         var language = weDownloadSettingService.getLanguage();
 
         moment.updateLocale('zh-cn', {

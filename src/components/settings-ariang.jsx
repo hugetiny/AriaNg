@@ -1,5 +1,5 @@
 import { Component } from 'react'
-class SettingsWeDownload extends Component {
+class SettingsweDownload extends Component {
     render() {
         return <div>
 <section className="content no-padding">
@@ -53,7 +53,7 @@ class SettingsWeDownload extends Component {
                             <i className="icon-primary fa fa-question-circle" data-toggle="popover"
                                data-trigger="hover" data-placement="auto right" data-container="body" data-html="true"
                                data-content="{{('Supported Placeholder' | translate) + ':<br/>' +
-                               ('WeDownload Title' | translate) + ': ${title}<br/>' +
+                               ('weDownload Title' | translate) + ': ${title}<br/>' +
                                ('Downloading Count' | translate) + ': ${downloading}<br/>' +
                                 ('Waiting Count' | translate) + ': ${waiting}<br/>' +
                                 ('Stopped Count' | translate) + ': ${stopped}<br/>' +
@@ -157,7 +157,7 @@ class SettingsWeDownload extends Component {
                     </div>
                     <div className="row">
                         <div className="setting-key setting-key-without-desc col-sm-4">
-                            <span translate>Import / Export WeDownload Settings</span>
+                            <span translate>Import / Export weDownload Settings</span>
                         </div>
                         <div className="setting-value col-sm-8">
                             <button className="btn btn-sm btn-default" onClick={showImportSettingsModal()}>
@@ -216,7 +216,7 @@ class SettingsWeDownload extends Component {
                             <span translate>Aria2 RPC Protocol</span>
                             <span className="asterisk">*</span>
                             <i className="icon-primary fa fa-question-circle" ng-tooltip-container="body" ng-tooltip-placement="top"
-                              data-toggle="tooltip" title="{{'Http and WebSocket would be disabled when accessing WeDownload via Https.' | translate}}"></i>
+                              data-toggle="tooltip" title="{{'Http and WebSocket would be disabled when accessing weDownload via Https.' | translate}}"></i>
                         </div>
                         <div className="setting-value col-sm-8">
                             <select className="form-control" style="width: 100%;" ng-model="setting.protocol" ng-change="updateRpcSetting(setting, 'protocol')">
@@ -278,7 +278,7 @@ class SettingsWeDownload extends Component {
                     <h4 className="modal-title">
                         <span translate>Import Settings</span>
                         <small>
-                            <a className="pointer-cursor"data-toggle="tooltip" title="{{'Open' | translate}}" onClick={openWeDownloadConfigFile()}>
+                            <a className="pointer-cursor"data-toggle="tooltip" title="{{'Open' | translate}}" onClick={openweDownloadConfigFile()}>
                                 <i className="icon-primary fa fa-folder-open-o"></i>
                             </a>
                         </small>
@@ -288,7 +288,7 @@ class SettingsWeDownload extends Component {
                     <div className="settings-table striped">
                         <input id="import-file-holder" type="file" style="display: none"/>
                         <textarea className="form-control" ng-model="context.importSettings" rows="20"
-                                  placeholder="'WeDownload settings data' | translate"></textarea>
+                                  placeholder="'weDownload settings data' | translate"></textarea>
                     </div>
                 </div>
                 <div className="modal-footer">
@@ -308,7 +308,7 @@ class SettingsWeDownload extends Component {
                         <span translate>Export Settings</span>
                         <small>
                             <a className="pointer-cursor"data-toggle="tooltip" title="{{'Save' | translate}}" ng-if="context.isSupportBlob"
-                               ng-blob-download="context.exportSettings" ng-file-name="WeDownloadConfig.json" ng-content-type="application/json">
+                               ng-blob-download="context.exportSettings" ng-file-name="weDownloadConfig.json" ng-content-type="application/json">
                                 <i className="icon-primary fa fa-save"></i>
                             </a>
                             <a className="pointer-cursor"data-toggle="tooltip" title="{{'Copy' | translate}}" onClick={copyExportSettings()}>

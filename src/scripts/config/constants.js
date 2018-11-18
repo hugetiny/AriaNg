@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('weDownload').constant('weDownloadConstants', {
-        title: 'WeDownload',
-        appPrefix: 'WeDownload',
+        title: 'weDownload',
+        appPrefix: 'weDownload',
         optionStorageKey: 'Options',
         languageStorageKeyPrefix: 'Language',
         settingHistoryKeyPrefix: 'History',

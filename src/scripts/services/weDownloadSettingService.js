@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadSettingService', ['$window', '$location', '$filter', 'WeDownloadConstants', 'WeDownloadDefaultOptions', 'WeDownloadLanguages', 'WeDownloadCommonService', 'WeDownloadLogService', 'WeDownloadStorageService', function ($window, $location, $filter, WeDownloadConstants, WeDownloadDefaultOptions, WeDownloadLanguages, WeDownloadCommonService, WeDownloadLogService, WeDownloadStorageService) {
+    angular.module('weDownload').factory('weDownloadSettingService', ['$window', '$location', '$filter', 'weDownloadConstants', 'weDownloadDefaultOptions', 'weDownloadLanguages', 'weDownloadCommonService', 'weDownloadLogService', 'weDownloadStorageService', function ($window, $location, $filter, weDownloadConstants, weDownloadDefaultOptions, weDownloadLanguages, weDownloadCommonService, weDownloadLogService, weDownloadStorageService) {
         var browserFeatures = (function () {
-            var supportLocalStroage = WeDownloadStorageService.isLocalStorageSupported();
-            var supportCookies = WeDownloadStorageService.isCookiesSupported();
+            var supportLocalStroage = weDownloadStorageService.isLocalStorageSupported();
+            var supportCookies = weDownloadStorageService.isCookiesSupported();
 
             return {
                 localStroage: supportLocalStroage,
@@ -43,12 +43,12 @@
         };
 
         var getLanguageNameFromAlias = function (alias) {
-            for (var langName in WeDownloadLanguages) {
-                if (!WeDownloadLanguages.hasOwnProperty(langName)) {
+            for (var langName in weDownloadLanguages) {
+                if (!weDownloadLanguages.hasOwnProperty(langName)) {
                     continue;
                 }
 
-                var language = WeDownloadLanguages[langName];
+                var language = weDownloadLanguages[langName];
                 var aliases = language.aliases;
 
                 if (!angular.isArray(aliases) || aliases.length < 1) {
@@ -69,12 +69,12 @@
             var browserLang = $window.navigator.browserLanguage ? $window.navigator.browserLanguage : $window.navigator.language;
 
             if (!browserLang) {
-                return WeDownloadDefaultOptions.language;
+                return weDownloadDefaultOptions.language;
             }
 
             browserLang = browserLang.replace(/\-/g, '_');
 
-            if (!WeDownloadLanguages[browserLang]) {
+            if (!weDownloadLanguages[browserLang]) {
                 var languageName = getLanguageNameFromAlias(browserLang);
 
                 if (languageName) {
@@ -82,8 +82,8 @@
                 }
             }
 
-            if (!WeDownloadLanguages[browserLang]) {
-                return WeDownloadDefaultOptions.language;
+            if (!weDownloadLanguages[browserLang]) {
+                return weDownloadDefaultOptions.language;
             }
 
             return browserLang;
@@ -106,22 +106,22 @@
                 return currentHost;
             }
 
-            return WeDownloadConstants.defaultHost;
+            return weDownloadConstants.defaultHost;
         };
 
         var setOptions = function (options) {
-            return WeDownloadStorageService.set(WeDownloadConstants.optionStorageKey, options);
+            return weDownloadStorageService.set(weDownloadConstants.optionStorageKey, options);
         };
 
         var getOptions = function () {
-            var options = WeDownloadStorageService.get(WeDownloadConstants.optionStorageKey);
+            var options = weDownloadStorageService.get(weDownloadConstants.optionStorageKey);
 
-            if (options && !WeDownloadLanguages[options.language]) {
+            if (options && !weDownloadLanguages[options.language]) {
                 options.language = getLanguageNameFromAliasOrDefaultLanguage(options.language);
             }
 
             if (!options) {
-                options = angular.extend({}, WeDownloadDefaultOptions);
+                options = angular.extend({}, weDownloadDefaultOptions);
                 options.language = getDefaultLanguage();
 
                 if (!options.rpcHost) {
@@ -146,14 +146,14 @@
         };
 
         var clearAll = function () {
-            return WeDownloadStorageService.clearAll();
+            return weDownloadStorageService.clearAll();
         };
 
         var getOption = function (key) {
             var options = getOptions();
 
-            if (angular.isUndefined(options[key]) && angular.isDefined(WeDownloadDefaultOptions[key])) {
-                options[key] = WeDownloadDefaultOptions[key];
+            if (angular.isUndefined(options[key]) && angular.isDefined(weDownloadDefaultOptions[key])) {
+                options[key] = weDownloadDefaultOptions[key];
                 setOptions(options);
             }
 
@@ -171,7 +171,7 @@
             setting.rpcHost = getDefaultRpcHost();
 
             if (isInsecureProtocolDisabled()) {
-                setting.protocol = WeDownloadConstants.defaultSecureProtocol;
+                setting.protocol = weDownloadConstants.defaultSecureProtocol;
             }
         };
 
@@ -188,8 +188,8 @@
         };
 
         var createNewRpcSetting = function () {
-            var setting = cloneRpcSetting(WeDownloadDefaultOptions);
-            setting.rpcId = WeDownloadCommonService.generateUniqueId();
+            var setting = cloneRpcSetting(weDownloadDefaultOptions);
+            setting.rpcId = weDownloadCommonService.generateUniqueId();
 
             initRpcSettingWithDefaultHostAndProtocol(setting);
 
@@ -204,10 +204,10 @@
                 return browserFeatures;
             },
             getAllOptions: function () {
-                var options = angular.extend({}, WeDownloadDefaultOptions, getOptions());
+                var options = angular.extend({}, weDownloadDefaultOptions, getOptions());
 
                 if (options.secret) {
-                    options.secret = WeDownloadCommonService.base64Decode(options.secret);
+                    options.secret = weDownloadCommonService.base64Decode(options.secret);
                 }
 
                 if (angular.isArray(options.extendRpcServers)) {
@@ -215,7 +215,7 @@
                         var rpcSetting = options.extendRpcServers[i];
 
                         if (rpcSetting.secret) {
-                            rpcSetting.secret = WeDownloadCommonService.base64Decode(rpcSetting.secret);
+                            rpcSetting.secret = weDownloadCommonService.base64Decode(rpcSetting.secret);
                         }
                     }
                 }
@@ -252,7 +252,7 @@
                 return result;
             },
             importAllOptions: function (options) {
-                var finalOptions = angular.copy(WeDownloadDefaultOptions);
+                var finalOptions = angular.copy(weDownloadDefaultOptions);
 
                 for (var key in options) {
                     if (!options.hasOwnProperty(key) || !finalOptions.hasOwnProperty(key)) {
@@ -290,7 +290,7 @@
                 setOptions(finalOptions);
             },
             exportAllOptions: function () {
-                var options = angular.extend({}, WeDownloadDefaultOptions, getOptions());
+                var options = angular.extend({}, weDownloadDefaultOptions, getOptions());
 
                 return options;
             },
@@ -304,7 +304,7 @@
                 return getOption('language');
             },
             setLanguage: function (value) {
-                if (!WeDownloadLanguages[value]) {
+                if (!weDownloadLanguages[value]) {
                     return false;
                 }
 
@@ -316,7 +316,7 @@
             },
             setDebugMode: function (value) {
                 sessionSettings.debugMode = value;
-                WeDownloadLogService.setEnableDebugLog(value);
+                weDownloadLogService.setEnableDebugLog(value);
             },
             getTitle: function () {
                 return getOption('title');
@@ -403,7 +403,7 @@
             },
             getCurrentRpcSecret: function () {
                 var value = getOption('secret');
-                return (value ? WeDownloadCommonService.base64Decode(value) : value);
+                return (value ? weDownloadCommonService.base64Decode(value) : value);
             },
             addNewRpcSetting: function () {
                 var options = getOptions();

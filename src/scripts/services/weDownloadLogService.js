@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').factory('WeDownloadLogService', ['$log', 'WeDownloadConstants', function ($log, WeDownloadConstants) {
+    angular.module('weDownload').factory('weDownloadLogService', ['$log', 'weDownloadConstants', function ($log, weDownloadConstants) {
         var enableDebugLog = false;
         var cachedDebugLogs = [];
 
@@ -19,7 +19,7 @@
                 return;
             }
 
-            if (cachedDebugLogs.length >= WeDownloadConstants.cachedDebugLogsLimit) {
+            if (cachedDebugLogs.length >= weDownloadConstants.cachedDebugLogsLimit) {
                 cachedDebugLogs.shift();
             }
 
@@ -33,9 +33,9 @@
             debug: function (msg, obj) {
                 if (enableDebugLog) {
                     if (obj) {
-                        $log.debug('[WeDownload Debug]' + msg, obj);
+                        $log.debug('[weDownload Debug]' + msg, obj);
                     } else {
-                        $log.debug('[WeDownload Debug]' + msg);
+                        $log.debug('[weDownload Debug]' + msg);
                     }
 
                     pushLogToCache(msg, 'DEBUG', obj);
@@ -43,27 +43,27 @@
             },
             info: function (msg, obj) {
                 if (obj) {
-                    $log.info('[WeDownload Info]' + msg, obj);
+                    $log.info('[weDownload Info]' + msg, obj);
                 } else {
-                    $log.info('[WeDownload Info]' + msg);
+                    $log.info('[weDownload Info]' + msg);
                 }
 
                 pushLogToCache(msg, 'INFO', obj);
             },
             warn: function (msg, obj) {
                 if (obj) {
-                    $log.warn('[WeDownload Warn]' + msg, obj);
+                    $log.warn('[weDownload Warn]' + msg, obj);
                 } else {
-                    $log.warn('[WeDownload Warn]' + msg);
+                    $log.warn('[weDownload Warn]' + msg);
                 }
 
                 pushLogToCache(msg, 'WARN', obj);
             },
             error: function (msg, obj) {
                 if (obj) {
-                    $log.error('[WeDownload Error]' + msg, obj);
+                    $log.error('[weDownload Error]' + msg, obj);
                 } else {
-                    $log.error('[WeDownload Error]' + msg);
+                    $log.error('[weDownload Error]' + msg);
                 }
 
                 pushLogToCache(msg, 'ERROR', obj);

@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('weDownload').filter('fileOrderBy', ['$filter', 'WeDownloadCommonService', function ($filter, WeDownloadCommonService) {
+    angular.module('weDownload').filter('fileOrderBy', ['$filter', 'weDownloadCommonService', function ($filter, weDownloadCommonService) {
         return function (array, type) {
             if (!angular.isArray(array) || !type) {
                 return array;
             }
 
-            var orderType = WeDownloadCommonService.parseOrderType(type);
+            var orderType = weDownloadCommonService.parseOrderType(type);
 
             if (orderType === null) {
                 return array;
