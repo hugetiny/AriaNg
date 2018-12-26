@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular.module('weDownload').controller('MainController', ['$rootScope', '$scope', '$route', '$window', '$location', '$document', '$interval', 'clipboard', 'aria2RpcErrors', 'weDownloadCommonService', 'weDownloadNotificationService', 'weDownloadLocalizationService', 'weDownloadSettingService', 'weDownloadMonitorService', 'weDownloadTitleService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $route, $window, $location, $document, $interval, clipboard, aria2RpcErrors, weDownloadCommonService, weDownloadNotificationService, weDownloadLocalizationService, weDownloadSettingService, weDownloadMonitorService, weDownloadTitleService, aria2TaskService, aria2SettingService) {
         var pageTitleRefreshPromise = null;
         var globalStatRefreshPromise = null;

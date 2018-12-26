@@ -5,7 +5,7 @@ if [ $CI == "true" ] && [ $CIRCLE_BRANCH == "master" ]; then
   ssh -o StrictHostKeyChecking=no git@github.com
 
   echo "Publishing daily build...";
-  git clone git@github.com:mayswind/WeDownload-DailyBuild.git $HOME/WeDownload-DailyBuild/
+  git clone git@github.com:hugetiny/WeDownload-DailyBuild.git $HOME/WeDownload-DailyBuild/
 
   rm -rf $HOME/WeDownload-DailyBuild/*
   cp dist/* $HOME/WeDownload-DailyBuild/ -r;

@@ -4,7 +4,7 @@
     angular.module('weDownload').directive('ngSettingDialog', ['weDownloadLocalizationService', 'aria2SettingService', function (weDownloadLocalizationService, aria2SettingService) {
         return {
             restrict: 'E',
-            templateUrl: 'views/setting-dialog.html',
+            templateUrl: 'src/views/setting-dialog.html',
             replace: true,
             scope: {
                 setting: '='

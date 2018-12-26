@@ -4,7 +4,7 @@
     angular.module('weDownload').directive('ngSetting', ['$timeout', '$q', 'weDownloadConstants', 'weDownloadLocalizationService', 'aria2SettingService', function ($timeout, $q, weDownloadConstants, weDownloadLocalizationService, aria2SettingService) {
         return {
             restrict: 'E',
-            templateUrl: 'views/setting.html',
+            templateUrl: 'src/views/setting.html',
             require: '?ngModel',
             replace: true,
             scope: {

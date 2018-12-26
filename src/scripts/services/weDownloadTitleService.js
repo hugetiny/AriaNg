@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
 
@@ -135,8 +136,10 @@
                     downloadSpeed: (globalStat ? globalStat.downloadSpeed : 0),
                     uploadSpeed: (globalStat ? globalStat.uploadSpeed : 0)
                 };
-
+                //给系统托盘进度条
+                ipcRenderer.send('download-speed', globalStat.downloadSpeed)
                 return this.getFinalTitle(context);
+
             }
         };
     }]);

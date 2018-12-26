@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-
+    const {ipcRenderer} = require('electron')
     var weDownload = angular.module('weDownload', [
         'ngRoute',
         'ngSanitize',
@@ -20,6 +20,6 @@
         'oitozero.ngSweetAlert',
         'angular-clipboard',
         'inputDropdown',
-        angularDragula(angular)
+        angularDragula(angular),
     ]);
 }());

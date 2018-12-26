@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   },
   "dependencies": {
     "admin-lte": "2.4.8",
@@ -11,7 +11,7 @@
     "angular-busy": "^4.1.4",
     "angular-clipboard": "^1.6.2",
     "angular-cookies": "1.6.10",
-    "angular-input-dropdown": "git://github.com/mayswind/angular-input-dropdown#68670e39816698b3eb98c0e740a0efe77d5fbdd1",
+    "angular-input-dropdown": "git://github.com/hugetiny/angular-input-dropdown#68670e39816698b3eb98c0e740a0efe77d5fbdd1",
     "angular-local-storage": "^0.7.1",
     "angular-messages": "1.6.10",
     "angular-moment": "^1.2.0",
@@ -35,6 +35,9 @@
     "moment": "2.22.2",
     "moment-timezone": "0.5.17",
     "natural-compare": "1.4.0",
+    "ngreact": "^0.5.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "sweetalert": "^1.1.3"
   },
   "devDependencies": {
@@ -47,13 +50,12 @@
   "name": "WeDownload",
   "description": "WeDownload, a modern web frontend making aria2 easier to use.",
   "version": "0.0.1",
-  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mayswind/WeDownload.git"
+    "url": "git+https://github.com/hugetiny/WeDownload.git"
   },
   "keywords": [
     "aria2",
@@ -61,10 +63,10 @@
     "Frontend",
     "UI"
   ],
-  "author": "MaysWind <i@mayswind.net>",
+  "author": "hugetiny <i@hugetiny.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mayswind/WeDownload/issues"
+    "url": "https://github.com/hugetiny/WeDownload/issues"
   },
-  "homepage": "http://WeDownload.mayswind.net/"
+  "homepage": "http://WeDownload.hugetiny.net/"
 }
